@@ -33,6 +33,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14. Integer to Hex and Bina
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "15. Fast Prime Checker - Refactor", "15. Fast Prime Checker - Refactor\15. Fast Prime Checker - Refactor.csproj", "{4B81AF00-1315-4E2A-A46F-F75951077A40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "17. Print Part of the ASCII Table", "17. Print Part of the ASCII Table\17. Print Part of the ASCII Table.csproj", "{CC59BF0D-B8CC-40A0-A192-990DD593997F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "16. Comparing Floats", "16. Comparing Floats\16. Comparing Floats.csproj", "{A2BB9E75-4907-435E-B3E0-DCF9C58EF29E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "18. Different Integers Size", "18. Different Integers Size\18. Different Integers Size.csproj", "{87196B9D-2645-4200-95CF-BA39A0488D2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "19. Thea the Photographer", "19. Thea the Photographer\19. Thea the Photographer.csproj", "{51DBBBA5-6D16-4141-94F9-72BA032CF1AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +107,22 @@ Global
 		{4B81AF00-1315-4E2A-A46F-F75951077A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B81AF00-1315-4E2A-A46F-F75951077A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B81AF00-1315-4E2A-A46F-F75951077A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC59BF0D-B8CC-40A0-A192-990DD593997F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC59BF0D-B8CC-40A0-A192-990DD593997F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC59BF0D-B8CC-40A0-A192-990DD593997F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC59BF0D-B8CC-40A0-A192-990DD593997F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2BB9E75-4907-435E-B3E0-DCF9C58EF29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2BB9E75-4907-435E-B3E0-DCF9C58EF29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2BB9E75-4907-435E-B3E0-DCF9C58EF29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2BB9E75-4907-435E-B3E0-DCF9C58EF29E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87196B9D-2645-4200-95CF-BA39A0488D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87196B9D-2645-4200-95CF-BA39A0488D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87196B9D-2645-4200-95CF-BA39A0488D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87196B9D-2645-4200-95CF-BA39A0488D2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51DBBBA5-6D16-4141-94F9-72BA032CF1AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51DBBBA5-6D16-4141-94F9-72BA032CF1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51DBBBA5-6D16-4141-94F9-72BA032CF1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51DBBBA5-6D16-4141-94F9-72BA032CF1AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
