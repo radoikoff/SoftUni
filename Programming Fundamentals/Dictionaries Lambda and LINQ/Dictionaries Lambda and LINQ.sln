@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4. Fix Emails", "4. Fix Ema
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5. Hands of Cards", "5. Hands of Cards\5. Hands of Cards.csproj", "{BBEEAE11-2554-45FA-893C-4101166701EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6. User Logs", "6. User Logs\6. User Logs.csproj", "{37F9DAF6-F16A-4E8E-B938-E68708BDC69E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7. Population Counter", "7. Population Counter\7. Population Counter.csproj", "{EE9E6EEF-CF7A-4F3E-BECD-DB9D692D5D67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BBEEAE11-2554-45FA-893C-4101166701EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBEEAE11-2554-45FA-893C-4101166701EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBEEAE11-2554-45FA-893C-4101166701EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37F9DAF6-F16A-4E8E-B938-E68708BDC69E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F9DAF6-F16A-4E8E-B938-E68708BDC69E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F9DAF6-F16A-4E8E-B938-E68708BDC69E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F9DAF6-F16A-4E8E-B938-E68708BDC69E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE9E6EEF-CF7A-4F3E-BECD-DB9D692D5D67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE9E6EEF-CF7A-4F3E-BECD-DB9D692D5D67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE9E6EEF-CF7A-4F3E-BECD-DB9D692D5D67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE9E6EEF-CF7A-4F3E-BECD-DB9D692D5D67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
