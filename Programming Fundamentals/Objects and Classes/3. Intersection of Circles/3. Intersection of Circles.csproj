@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Circle.cs" />
     <Compile Include="Point.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Intersection of Circles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

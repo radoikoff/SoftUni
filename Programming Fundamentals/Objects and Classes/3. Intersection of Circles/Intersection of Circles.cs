@@ -1,17 +1,5 @@
 ﻿using System;
 
-public class Point
-{
-    public int X { get; set; }
-    public int Y { get; set; }
-}
-
-public class Circle
-{
-    public Point Center { get; set; }
-    public int Radius { get; set; }
-}
-
 namespace _3.Intersection_of_Circles
 {
     class Program
