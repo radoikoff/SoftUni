@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace _3.A_Miner_Task
 {
-    class Program
+    class A_Miner_Task
     {
         public static void Main()
         {

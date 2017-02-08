@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _7.Population_Counter
 {
-    class Program
+    class Population_Counter
     {
         public static void Main()
         {

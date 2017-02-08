@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _5.Hands_of_Cards
 {
-    class Program
+    class Hands_of_Cards
     {
         public static void Main()
         {

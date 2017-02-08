@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _9.Legendary_Farming
 {
-    class Program
+    class Legendary_Farming
     {
         public static void Main()
         {

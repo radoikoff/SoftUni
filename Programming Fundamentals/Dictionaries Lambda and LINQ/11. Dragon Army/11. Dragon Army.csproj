@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{90B2F253-FA2A-4D11-A97F-4D02E5C7074E}</ProjectGuid>
+    <ProjectGuid>{309FFB97-DAB6-4417-BF6E-93FA1CEE2D0E}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_8.Logs_Aggregator</RootNamespace>
-    <AssemblyName>_8.Logs_Aggregator</AssemblyName>
+    <RootNamespace>_11.Dragon_Army</RootNamespace>
+    <AssemblyName>_11.Dragon_Army</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logs_Aggregator.cs" />
+    <Compile Include="Dragon Army.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

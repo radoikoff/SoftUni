@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _8.Logs_Aggregator
 {
-    public class Program
+    public class Logs_Aggregator
     {
         static void Main()
         {

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _1.Phonebook
+namespace _2.Phonebook_Upgrade
 {
-    class Program
+    class Phonebook_Upgrade
     {
         public static void Main()
         {
-            var phonebook = new Dictionary<string, string>();
+            var phonebook = new SortedDictionary<string, string>();
             var input = Console.ReadLine().Split(' ').ToList();
             while (input[0].ToLower() != "end")
             {
@@ -18,7 +18,7 @@ namespace _1.Phonebook
                         phonebook[input[1]] = input[2];
                         break;
                     case "s":
-                        if (phonebook.ContainsKey (input[1]))
+                        if (phonebook.ContainsKey(input[1]))
                         {
                             Console.WriteLine($"{input[1]} -> {phonebook[input[1]]}");
                         }
@@ -27,6 +27,13 @@ namespace _1.Phonebook
                             Console.WriteLine($"Contact {input[1]} does not exist.");
                         }
                         break;
+                    case "listall":
+                        foreach (var pair in phonebook)
+                        {
+                            Console.WriteLine($"{pair.Key} -> {pair.Value}");
+                        }
+                        break;
+
                 }
                 input = Console.ReadLine().Split(' ').ToList();
             }

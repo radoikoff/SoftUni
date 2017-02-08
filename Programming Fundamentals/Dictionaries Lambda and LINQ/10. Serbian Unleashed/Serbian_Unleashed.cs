@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _10.Serbian_Unleashed
 {
-    public class Program
+    public class Serbian_Unleashed
     {
         public static void Main()
         {

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _4.Fix_Emails
 {
-    class Program
+    class Fix_Emails
     {
         private static IEnumerable<object> fixedMailAddr;
 

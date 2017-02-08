@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9. Legendary Farming", "9. 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "10. Serbian Unleashed", "10. Serbian Unleashed\10. Serbian Unleashed.csproj", "{2D47A359-D44F-481A-9AD2-27FE10B1B836}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11. Dragon Army", "11. Dragon Army\11. Dragon Army.csproj", "{309FFB97-DAB6-4417-BF6E-93FA1CEE2D0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{2D47A359-D44F-481A-9AD2-27FE10B1B836}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D47A359-D44F-481A-9AD2-27FE10B1B836}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D47A359-D44F-481A-9AD2-27FE10B1B836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{309FFB97-DAB6-4417-BF6E-93FA1CEE2D0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{309FFB97-DAB6-4417-BF6E-93FA1CEE2D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{309FFB97-DAB6-4417-BF6E-93FA1CEE2D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{309FFB97-DAB6-4417-BF6E-93FA1CEE2D0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
