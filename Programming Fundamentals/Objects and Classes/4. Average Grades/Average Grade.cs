@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _4.Average_Grades
 {
-    public class Program
+    public class Average_Grades
     {
         public static void Main()
         {

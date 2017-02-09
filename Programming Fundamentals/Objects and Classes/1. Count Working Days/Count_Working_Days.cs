@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace _1.Count_Working_Days
 {
-    class Program
+    class Count_Working_Days
     {
         public static void Main()
         {

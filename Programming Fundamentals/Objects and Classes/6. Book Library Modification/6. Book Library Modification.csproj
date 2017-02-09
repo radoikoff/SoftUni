@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5EF58E40-0E85-491D-9F1C-57792F9DEC8F}</ProjectGuid>
+    <ProjectGuid>{C4035D1C-DEA0-4419-B522-937C3F3BCBA7}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>_1.Count_Working_Days</RootNamespace>
-    <AssemblyName>_1.Count_Working_Days</AssemblyName>
+    <RootNamespace>_6.Book_Library_Modification</RootNamespace>
+    <AssemblyName>_6.Book_Library_Modification</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Count_Working_Days.cs" />
+    <Compile Include="Book.cs" />
+    <Compile Include="Book_Library_Modification.cs" />
+    <Compile Include="Library.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

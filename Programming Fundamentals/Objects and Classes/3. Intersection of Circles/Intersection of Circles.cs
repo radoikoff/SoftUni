@@ -2,7 +2,7 @@
 
 namespace _3.Intersection_of_Circles
 {
-    class Program
+    class Intersection_of_Circles
     {
         public static void Main()
         {

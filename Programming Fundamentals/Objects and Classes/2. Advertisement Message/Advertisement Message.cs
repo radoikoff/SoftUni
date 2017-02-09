@@ -2,7 +2,7 @@
 
 namespace _2.Advertisement_Message
 {
-    class Program
+    class Advertisement_Message
     {
         public static void Main()
         {
