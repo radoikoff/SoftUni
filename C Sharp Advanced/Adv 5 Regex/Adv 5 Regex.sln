@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4. ReplaceTag", "4. Replace
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6. Sentence Extractor", "6. Sentence Extractor\6. Sentence Extractor.csproj", "{D52A0C06-E6BA-4244-A239-4230C72C89B1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8. ExtractHyperlinks", "8. ExtractHyperlinks\8. ExtractHyperlinks.csproj", "{1B125C81-F9A4-4CEB-A3BB-E1486C8CB432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "11. Semantic HTML", "11. Semantic HTML\11. Semantic HTML.csproj", "{F2505744-A598-4108-B9DB-22A3FA72066C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{D52A0C06-E6BA-4244-A239-4230C72C89B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D52A0C06-E6BA-4244-A239-4230C72C89B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D52A0C06-E6BA-4244-A239-4230C72C89B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B125C81-F9A4-4CEB-A3BB-E1486C8CB432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B125C81-F9A4-4CEB-A3BB-E1486C8CB432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B125C81-F9A4-4CEB-A3BB-E1486C8CB432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B125C81-F9A4-4CEB-A3BB-E1486C8CB432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2505744-A598-4108-B9DB-22A3FA72066C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2505744-A598-4108-B9DB-22A3FA72066C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2505744-A598-4108-B9DB-22A3FA72066C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2505744-A598-4108-B9DB-22A3FA72066C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
