@@ -64,7 +64,7 @@ public abstract class Race
         get { return participants; }
     }
 
-    public void AddCar(int carId, Car car)
+    public virtual void AddCar(int carId, Car car)
     {
         if (!this.participants.ContainsKey(carId))
         {
@@ -74,7 +74,7 @@ public abstract class Race
 
     public abstract int GetPerformance(int carId);
 
-    private List<int> GetPrizes()
+    protected List<int> GetPrizes()
     {
         var prizes = new List<int>();
         prizes.Add(this.prizePool * 50 / 100);
@@ -84,7 +84,7 @@ public abstract class Race
         return prizes;
     }
 
-    public string StartRace()
+    public virtual string StartRace()
     {
         StringBuilder sb = new StringBuilder();
         sb.AppendLine($"{this.route} - {this.length}");

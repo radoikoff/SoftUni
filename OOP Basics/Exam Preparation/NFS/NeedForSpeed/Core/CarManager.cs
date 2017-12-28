@@ -64,6 +64,22 @@ public class CarManager
         }
     }
 
+    public void Open(int id, string type, int length, string route, int prizePool, int extraArg)
+    {
+        if (!races.ContainsKey(id))
+        {
+            switch (type)
+            {
+                case "TimeLimit":
+                    races.Add(id, new TimeLimitRace(length, route, prizePool, extraArg));
+                    break;
+                case "Circuit":
+                    //races.Add(id, new CircuitRace(length, route, prizePool, extraArg));
+                    break;
+            }
+        }
+    }
+
     public void Participate(int carId, int raceId)
     {
         if (races.ContainsKey(raceId) && !garage.ParkedCars.Contains(carId) && !closedRaces.Contains(raceId))

@@ -43,7 +43,17 @@ public class Program
                     int length = int.Parse(cmdArgs[3]);
                     string route = cmdArgs[4];
                     int prizePool = int.Parse(cmdArgs[5]);
-                    manager.Open(id, type, length, route, prizePool);
+                    if (cmdArgs.Length>5)
+                    {
+                        int extraArg = int.Parse(cmdArgs[6]);
+                        manager.Open(id, type, length, route, prizePool, extraArg);
+                    }
+                    else
+                    {
+                        manager.Open(id, type, length, route, prizePool);
+                    }
+                    
+                    
                     break;
                 case "participate":
                     int carId = int.Parse(cmdArgs[1]);
