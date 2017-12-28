@@ -74,7 +74,7 @@ public class CarManager
                     races.Add(id, new TimeLimitRace(length, route, prizePool, extraArg));
                     break;
                 case "Circuit":
-                    //races.Add(id, new CircuitRace(length, route, prizePool, extraArg));
+                    races.Add(id, new CircuitRace(length, route, prizePool, extraArg));
                     break;
             }
         }

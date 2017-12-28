@@ -72,7 +72,7 @@ public class TimeLimitRace : Race
         var prize = GetPrize(timePerformance);
 
         sb.AppendLine($"{this.Route} - {this.Length}");
-        sb.AppendLine($"{car.Brand} { car.Model} – { this.GetPerformance(carId)} s.");
+        sb.AppendLine($"{car.Brand} { car.Model} - { this.GetPerformance(carId)} s.");
         sb.AppendLine($"{participantEarnedTime} Time, ${prize}.");
 
         return sb.ToString().Trim();

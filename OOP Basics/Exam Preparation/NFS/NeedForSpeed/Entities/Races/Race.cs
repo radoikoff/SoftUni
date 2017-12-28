@@ -74,7 +74,7 @@ public abstract class Race
 
     public abstract int GetPerformance(int carId);
 
-    protected List<int> GetPrizes()
+    protected virtual List<int> GetPrizes()
     {
         var prizes = new List<int>();
         prizes.Add(this.prizePool * 50 / 100);
