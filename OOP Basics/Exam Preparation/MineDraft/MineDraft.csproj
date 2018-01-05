@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DraftManager.cs" />
+    <Compile Include="Entities\Factories\HarvesterFactory.cs" />
+    <Compile Include="Entities\Factories\ProviderFactory.cs" />
     <Compile Include="Entities\Harvesters\HammerHarvester.cs" />
     <Compile Include="Entities\Harvesters\Harvester.cs" />
     <Compile Include="Entities\Harvesters\SonicHarvester.cs" />

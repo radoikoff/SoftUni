@@ -26,21 +26,10 @@ public class DraftManager
     {
         string type = arguments[0];
         string id = arguments[1];
-        double oreOutput = double.Parse(arguments[2]);
-        double energyRequirement = double.Parse(arguments[3]);
 
         try
         {
-            switch (type)
-            {
-                case "Sonic":
-                    int sonicFactor = int.Parse(arguments[4]);
-                    harvesters.Add(new SonicHarvester(id, oreOutput, energyRequirement, sonicFactor));
-                    break;
-                case "Hammer":
-                    harvesters.Add(new HammerHarvester(id, oreOutput, energyRequirement));
-                    break;
-            }
+            harvesters.Add(HarvesterFactory.Create(arguments));
             return $"Successfully registered {type} Harvester - {id}";
         }
         catch (ArgumentOutOfRangeException ex)
@@ -53,19 +42,10 @@ public class DraftManager
     {
         string type = arguments[0];
         string id = arguments[1];
-        double energyOutput = double.Parse(arguments[2]);
 
         try
         {
-            switch (type)
-            {
-                case "Solar":
-                    providers.Add(new SolarProvider(id, energyOutput));
-                    break;
-                case "Pressure":
-                    providers.Add(new PressureProvider(id, energyOutput));
-                    break;
-            }
+            providers.Add(ProviderFactory.Create(arguments));
             return $"Successfully registered {type} Provider - {id}";
         }
         catch (ArgumentOutOfRangeException ex)
