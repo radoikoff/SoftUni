@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public abstract class Harvester
+public abstract class Harvester : Equipment
 {
-
-    private string id;
     private double oreOutput;
     private double energyRequirement;
 
     public Harvester(string id, double oreOutput, double energyRequirement)
+        : base(id)
     {
-        this.Id = id;
         this.OreOutput = oreOutput;
         this.EnergyRequirement = energyRequirement;
     }
@@ -44,13 +42,6 @@ public abstract class Harvester
             }
             oreOutput = value;
         }
-    }
-
-
-    public string Id
-    {
-        get { return id; }
-        protected set { id = value; }
     }
 
     public override string ToString()

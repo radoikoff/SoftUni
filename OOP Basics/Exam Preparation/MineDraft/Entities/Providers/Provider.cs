@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public abstract class Provider
+public abstract class Provider : Equipment
 {
-    private string id;
     private double energyOutput;
 
     public Provider(string id, double energyOutput)
+        : base(id)
     {
-        this.Id = id;
         this.EnergyOutput = energyOutput;
     }
 
@@ -28,14 +27,6 @@ public abstract class Provider
             energyOutput = value;
         }
     }
-
-
-    public string Id
-    {
-        get { return id; }
-        protected set { id = value; }
-    }
-
 
     public override string ToString()
     {
