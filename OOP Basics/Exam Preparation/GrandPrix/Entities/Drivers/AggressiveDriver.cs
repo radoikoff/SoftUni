@@ -15,11 +15,9 @@ public class AggressiveDriver : Driver
 
     public override double Speed
     {
-        get
-        {
-            return base.Speed * 1.3;
-        }
+        get { return base.Speed * 1.3; }
     }
+
 
     public override double GetOvertakeTime()
     {

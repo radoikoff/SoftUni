@@ -15,8 +15,8 @@ public class RaceTower
 
     public RaceTower()
     {
-        List<Driver> drivers = new List<Driver>();
-        Dictionary<string, string> failedDrivers = new Dictionary<string, string>();
+        this.drivers = new List<Driver>();
+        this.failedDrivers = new Dictionary<string, string>();
     }
 
     public void SetTrackInfo(int lapsNumber, int trackLength)

@@ -18,39 +18,26 @@ public class UltrasoftTyre : Tyre
     public double Grip
     {
         get { return grip; }
-        set
-        {
-            if (value >= 0)
-            {
-                this.grip = value;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-        }
+        protected set { this.grip = value; }
     }
 
     public override double Degradation
     {
         get { return base.Degradation; }
 
-        set
+        protected set
         {
-            if (value >= 30)
-            {
-                base.Degradation = value;
-            }
-            else
+            if (value < 30)
             {
                 throw new ArgumentOutOfRangeException("Blown Tyre");
             }
+            base.Degradation = value;
         }
     }
 
     public override void SetDegradation()
     {
-        Degradation -= Hardness + Grip;
+        base.Degradation -= base.Hardness + this.Grip;
     }
 }
 

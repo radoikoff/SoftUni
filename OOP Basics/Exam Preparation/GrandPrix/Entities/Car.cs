@@ -7,22 +7,28 @@ using System.Threading.Tasks;
 
 public class Car
 {
-
     private int hp;
     private double fuelAmount;
     private Tyre tyre;
 
     public Car(int hp, double fuelAmount, Tyre tyre)
     {
-        this.hp = hp;
+        this.Hp = hp;
         this.FuelAmount = fuelAmount;
-        this.tyre = tyre;
+        this.Tyre = tyre;
     }
 
     public Tyre Tyre
     {
         get { return tyre; }
-        //set { tyre = value; }
+        protected set
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException();
+            }
+            tyre = value;
+        }
     }
 
 
@@ -35,7 +41,7 @@ public class Car
             {
                 this.fuelAmount = 160;
             }
-            else if (value <= 0)
+            else if (value < 0)
             {
                 this.fuelAmount = 0;
                 throw new ArgumentOutOfRangeException("Out of fuel");
@@ -51,7 +57,7 @@ public class Car
     public int Hp
     {
         get { return hp; }
-        //set { hp = value; }
+        protected set { hp = value; }
     }
 
 

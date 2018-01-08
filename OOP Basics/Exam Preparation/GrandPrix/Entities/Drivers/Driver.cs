@@ -10,19 +10,17 @@ public abstract class Driver
     private double totalTime;
     private Car car;
     private double fuelConsumptionPerKm;
-    //private double speed;
 
-    public Driver(string name, Car car)
+    protected Driver(string name, Car car)
     {
-        this.name = name;
+        this.Name = name;
         this.Car = car;
-        //this.speed = (this.car.Hp + this.car.Tyre.Degradation) / this.car.FuelAmount;
+        this.TotalTime = 0;
     }
 
     public virtual double Speed
     {
         get { return (this.car.Hp + this.car.Tyre.Degradation) / this.car.FuelAmount; }
-        //protected set { speed = value; }
     }
 
 
@@ -36,41 +34,21 @@ public abstract class Driver
     public Car Car
     {
         get { return car; }
-        set
-        {
-            if (car != null)
-            {
-                car = value;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-        }
+        protected set { car = value; }
     }
 
 
     public double TotalTime
     {
         get { return this.totalTime; }
-        set
-        {
-            if (value > 0)
-            {
-                this.totalTime = value;
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-        }
+        set { this.totalTime = value; }
     }
 
 
     public string Name
     {
         get { return name; }
-        //set { name = value; }
+        protected set { name = value; }
     }
 
     public abstract double GetOvertakeTime();

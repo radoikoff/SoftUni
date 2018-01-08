@@ -12,26 +12,23 @@ public abstract class Tyre
     private double hardness;
     private double degradation;
 
-    public Tyre(string name, double hardness)
+    protected Tyre(string name, double hardness)
     {
-        this.name = name;
-        this.hardness = hardness;
-        this.degradation = 100;
+        this.Name = name;
+        this.Hardness = hardness;
+        this.Degradation = 100;
     }
 
     public virtual double Degradation
     {
         get { return this.degradation; }
-        set
+        protected set
         {
-            if (value >= 0)
-            {
-                this.degradation = value; ;
-            }
-            else
+            if (value <= 0)
             {
                 throw new ArgumentOutOfRangeException("Blown Tyre");
             }
+            this.degradation = value;
         }
     }
 
@@ -39,17 +36,20 @@ public abstract class Tyre
     public double Hardness
     {
         get { return hardness; }
-        //set { hardness = value; }
+        protected set { hardness = value; }
     }
 
 
     public string Name
     {
         get { return name; }
-        //set { name = value; }
+        protected set { name = value; }
     }
 
-    public abstract void SetDegradation();
+    public virtual void SetDegradation()
+    {
+        this.Degradation -= this.Hardness;
+    }
 
 }
 

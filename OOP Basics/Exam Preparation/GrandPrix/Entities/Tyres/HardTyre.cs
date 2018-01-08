@@ -11,10 +11,5 @@ public class HardTyre : Tyre
         : base("Hard", hardness)
     {
     }
-
-    public override void SetDegradation()
-    {
-        Degradation -= Hardness;
-    }
 }
 
