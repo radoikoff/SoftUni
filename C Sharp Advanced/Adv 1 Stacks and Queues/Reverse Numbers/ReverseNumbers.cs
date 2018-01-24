@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Reverse_Numbers
 {
@@ -10,9 +8,9 @@ namespace Reverse_Numbers
     {
         public static void Main()
         {
-            var input = Console.ReadLine().Split().ToArray();
+            var input = Console.ReadLine().Split(new char[] { ' ' }, StringSplitOptions .RemoveEmptyEntries ).Select(int.Parse).ToArray();
 
-            var stack = new Stack<string>();
+            var stack = new Stack<int>();
 
             foreach (var number in input)
             {
