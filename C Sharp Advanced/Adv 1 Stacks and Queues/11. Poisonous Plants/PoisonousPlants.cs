@@ -10,40 +10,34 @@ namespace _11.Poisonous_Plants
     {
         public static void Main()
         {
-            int plantsNumber = int.Parse(Console.ReadLine());
-            var pesticideData = Console.ReadLine().Split().Select(double.Parse).Reverse();
-            var data = new Queue<double>(pesticideData);
-            int count = 0;
+            var plantsNumber = int.Parse(Console.ReadLine());
+            var plants = Console.ReadLine()
+                .Split(' ')
+                .Select(int.Parse) 
+                .ToArray();
 
-            while (true)
+            var days = new int[plantsNumber];
+            var indexes = new Stack<int>();
+            indexes.Push(0);
+
+            for (int i = 1; i < plants.Length; i++)
             {
-                for (int i = 1; i <= plantsNumber; i++)
+                int maxDays = 0;
+
+                while (indexes.Count > 0 && plants[indexes.Peek()] >= plants[i])
                 {
-                    var lastPlant = data.Dequeue();
-                    if (data.Count != 0)
-                    {
-                        if (lastPlant <= data.Peek() || i == plantsNumber)
-                        {
-                            data.Enqueue(lastPlant);
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    maxDays = Math.Max(maxDays, days[indexes.Pop()]);
                 }
-                //Console.WriteLine(string.Join(" ",data));
-                if (plantsNumber != data.Count())
+
+                if (indexes.Count > 0)
                 {
-                    plantsNumber = data.Count();
-                    count++;
+                    days[i] = maxDays + 1;
                 }
-                else
-                {
-                    break;
-                }
+
+                indexes.Push(i);
             }
-            Console.WriteLine(count);
+
+            Console.WriteLine(days.Max());
         }
     }
 }
