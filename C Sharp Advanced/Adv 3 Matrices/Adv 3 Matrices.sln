@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "8. RadioactiveBunnies", "8.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12. String Matrix Rotation", "12. String Matrix Rotation\12. String Matrix Rotation.csproj", "{CF1021DB-B1C4-4616-814F-0CB0223A889F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "9. Crossfire", "9. Crossfire\9. Crossfire.csproj", "{B759B1CC-4108-4859-9922-541BBC42E53A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{CF1021DB-B1C4-4616-814F-0CB0223A889F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF1021DB-B1C4-4616-814F-0CB0223A889F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF1021DB-B1C4-4616-814F-0CB0223A889F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B759B1CC-4108-4859-9922-541BBC42E53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B759B1CC-4108-4859-9922-541BBC42E53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B759B1CC-4108-4859-9922-541BBC42E53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B759B1CC-4108-4859-9922-541BBC42E53A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
