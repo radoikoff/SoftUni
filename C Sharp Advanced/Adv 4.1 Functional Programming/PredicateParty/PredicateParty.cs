@@ -21,8 +21,17 @@ namespace PredicateParty
                 switch (command)
                 {
                     case "Double":
-                        var moreNames = names.Where(n => checkFunc(n, criteria, pattern)).ToList();
-                        names.AddRange(moreNames);
+                        for (int i = 0; i < names.Count; i++)
+                        {
+                            if (checkFunc(names[i],criteria, pattern))
+                            {
+                                names.Insert(i + 1, names[i]);
+                                i++;
+                            }
+                            
+                        }
+                        //var moreNames = names.Where(n => checkFunc(n, criteria, pattern)).ToList();
+                        //names.AddRange(moreNames);
                         break;
                     case "Remove":
                         names.RemoveAll(n => checkFunc(n, criteria, pattern));
@@ -34,7 +43,7 @@ namespace PredicateParty
             }
             if (names.Count != 0)
             {
-                Console.WriteLine(string.Join(", ", names.OrderBy(n => n)) + " are going to the party!");
+                Console.WriteLine(string.Join(", ", names) + " are going to the party!");
             }
             else
             {
