@@ -1,4 +1,9 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 public class Person
 {
     private string name;
@@ -37,6 +42,10 @@ public class Person
         set { name = value; }
     }
 
+    public override string ToString()
+    {
+        return $"{Name} {Age.ToString()}";
+    }
 
 }
 
