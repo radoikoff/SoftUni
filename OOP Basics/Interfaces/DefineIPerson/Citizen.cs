@@ -5,15 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public class Citizen : IPerson
+public class Citizen : IPerson, IIdentifiable, IBirthable
 {
     private string name;
     private int age;
+    private string id;
+    private string birthdate;
 
-    public Citizen(string name, int age)
+    public Citizen(string name, int age, string id, string birthdate)
     {
         this.Name = name;
         this.Age = age;
+        this.Id = id;
+        this.Birthdate = birthdate;
     }
 
     public int Age
@@ -29,5 +33,18 @@ public class Citizen : IPerson
         private set { name = value; }
     }
 
+    public string Id
+    {
+        get { return id; }
+
+        private set { id = value; }
+    }
+
+    public string Birthdate
+    {
+        get { return birthdate; }
+
+        private set { birthdate = value; }
+    }
 }
 
