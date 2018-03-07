@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 public class Car : Vehicle
 {
-    public Car(double fuelQuantity, double fuelConsumptionPerKm)
-        : base(fuelQuantity, fuelConsumptionPerKm += 0.9)
+    public Car(double fuelQuantity, double fuelConsumptionPerKm, int tankCapacity)
+        : base(fuelQuantity, fuelConsumptionPerKm += 0.9, tankCapacity)
     {
     }
 
@@ -23,15 +23,11 @@ public class Car : Vehicle
         return $"Car needs refueling";
     }
 
-    public override void Refuel(double fuelAmount)
-    {
-        this.FuelQuantity += fuelAmount;
-    }
-
     public override string ToString()
     {
         return $"Car: {base.FuelQuantity:F2}";
     }
+    
 }
 
 
