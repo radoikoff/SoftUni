@@ -21,7 +21,8 @@ namespace Logger
             ICollection<IAppender> appenders = new List<IAppender>();
 
             LayoutFactory layoutFactory = new LayoutFactory();
-            AppenderFactory appenderFactory = new AppenderFactory(layoutFactory);
+            FileFactory fileFactory = new FileFactory();
+            AppenderFactory appenderFactory = new AppenderFactory(layoutFactory, fileFactory);
 
             int appenderCount = int.Parse(Console.ReadLine());
             for (int i = 0; i < appenderCount; i++)

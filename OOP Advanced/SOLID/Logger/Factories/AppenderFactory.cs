@@ -9,15 +9,14 @@ namespace Logger.Factories
 {
     public class AppenderFactory
     {
-        private const string DefaultFileName = "LogFile{0}.txt";
 
         private LayoutFactory layoutFactory;
-        private int fileNumber;
+        private FileFactory fileFactory;
 
-        public AppenderFactory(LayoutFactory layoutFactory)
+        public AppenderFactory(LayoutFactory layoutFactory, FileFactory fileFactory)
         {
             this.layoutFactory = layoutFactory;
-            this.fileNumber = 0;
+            this.fileFactory = fileFactory;
         }
 
         public IAppender CreateAppender(string appenderType, string errorLevelAsString, string layoutType)
@@ -30,7 +29,7 @@ namespace Logger.Factories
                 case "ConsoleAppender":
                     return new ConsoleAppender(layout, errorLevel);
                 case "FileAppender":
-                    ILogFile logFile = new LogFile(string.Format(DefaultFileName, fileNumber));
+                    ILogFile logFile = fileFactory.CreateLogFile();
                     return new FileAppender(layout, errorLevel, logFile);
                 default:
                     throw new ArgumentException("Invalid Appender Type!");

@@ -13,9 +13,21 @@ namespace Logger.Factories
 
         public IError CreateError(string timeStampAsString, string errorLevelAsString, string message)
         {
-            DateTime timestamp = DateTime.ParseExact(timeStampAsString, DateFormat, CultureInfo.InvariantCulture); //to check if parse is OK
+            DateTime timestamp = ParseTimeStamp(timeStampAsString);
+
             ErrorLevel errorLevel = ParseErrorLevel(errorLevelAsString);
             return new Error(timestamp, message, errorLevel);
+        }
+
+        private DateTime ParseTimeStamp(string timeStampAsString)
+        {
+            DateTime timeStamp;
+            bool conversionSucessful = DateTime.TryParseExact(timeStampAsString, DateFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out timeStamp); //to check if parse is OK
+            if (!conversionSucessful)
+            {
+                throw new ArgumentException("Invalid TimeStamp Format!");
+            }
+            return timeStamp;
         }
 
         private ErrorLevel ParseErrorLevel(string errorLevelAsString)
