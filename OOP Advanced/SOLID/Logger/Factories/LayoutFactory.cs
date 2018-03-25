@@ -17,6 +17,8 @@ namespace Logger.Factories
                     return new SimpleLayout();
                 case "XmlLayout":
                     return new XmlLayout();
+                case "CsvLayout":
+                    return new CsvLayout();
                 default:
                     throw new ArgumentException("Invalid Layout Type!");
             }
