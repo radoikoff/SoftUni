@@ -10,6 +10,6 @@ namespace Logger.Models.Interfaces
 
         int Size { get; }
 
-        void WriteToFile();
+        void WriteToFile(string errorLog);
     }
 }

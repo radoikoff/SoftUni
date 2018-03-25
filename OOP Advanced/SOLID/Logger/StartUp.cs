@@ -1,6 +1,6 @@
 ﻿using Logger.Factories;
-using Logger.Models;
 using Logger.Models.Interfaces;
+using Logger.Models.Loggers;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +11,7 @@ namespace Logger
         static void Main(string[] args)
         {
             ILogger logger = InitializeLogger();
-            ErrorFactory errorFactory= new ErrorFactory();
+            ErrorFactory errorFactory = new ErrorFactory();
             Engine engine = new Engine(logger, errorFactory);
             engine.Run();
         }

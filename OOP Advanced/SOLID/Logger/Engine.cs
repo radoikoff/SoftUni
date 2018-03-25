@@ -22,13 +22,20 @@ namespace Logger
             string input = string.Empty;
             while ((input = Console.ReadLine()) != "END")
             {
-                var args = input.Split('|');
-                string level = args[0];
-                string timeStamp = args[1];
-                string message = args[2];
+                try
+                {
+                    var args = input.Split('|');
+                    string level = args[0];
+                    string timeStamp = args[1];
+                    string message = args[2];
 
-                IError error = this.errorFactory.CreateError(timeStamp, level, message);
-                this.logger.Log(error);
+                    IError error = this.errorFactory.CreateError(timeStamp, level, message);
+                    this.logger.Log(error);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
 
             Console.WriteLine("Logger info");

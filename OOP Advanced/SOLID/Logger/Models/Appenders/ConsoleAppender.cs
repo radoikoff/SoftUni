@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Logger.Models
+namespace Logger.Models.Appenders
 {
     public class ConsoleAppender : IAppender
     {
@@ -32,8 +32,6 @@ namespace Logger.Models
             string appenderType = this.GetType().Name;
             string layoutType = this.Layout.GetType().Name;
             string level = this.Level.ToString();
-
-
 
             string result = $"Appender type: {appenderType}, Layout type: {layoutType}, Report level: {level}, Messages appended: {this.MessagesAppended}";
             return result;
