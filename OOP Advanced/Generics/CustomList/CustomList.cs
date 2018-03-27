@@ -5,15 +5,29 @@ using System.Text;
 
 namespace CustomList
 {
-    public class CustomList<T> where T : IComparable
+    public class CustomList<T> where T : IComparable<T>
     {
         private readonly List<T> items;
-
-        public IReadOnlyCollection<T> Items => this.items.AsReadOnly();
 
         public CustomList()
         {
             this.items = new List<T>();
+        }
+
+        public IList<T> Items => this.items.AsReadOnly();
+
+        public int Count => this.items.Count;
+
+        public T this[int index]
+        {
+            get
+            {
+                return this.items[index];
+            }
+            set
+            {
+                this.items[index] = value;
+            }
         }
 
         public void Add(T element)
@@ -28,6 +42,7 @@ namespace CustomList
             return item;
         }
 
+        
         public bool Contains(T element)
         {
             return this.items.Contains(element);

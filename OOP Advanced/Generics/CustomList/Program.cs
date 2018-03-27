@@ -51,6 +51,9 @@ namespace CustomList
                             Console.WriteLine(item);
                         }
                         break;
+                    case "Sort":
+                        Sorter.Sort(data);
+                        break;
                 }
             }
         }
