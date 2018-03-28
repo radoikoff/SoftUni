@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace CustomList
 {
-    public class CustomList<T> where T : IComparable<T>
+    public class CustomList<T> : IEnumerable<T> where T : IComparable<T>
     {
         private readonly List<T> items;
 
@@ -68,6 +69,16 @@ namespace CustomList
         public T Min()
         {
             return this.items.Min();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this.Items.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.Items.GetEnumerator();
         }
     }
 }

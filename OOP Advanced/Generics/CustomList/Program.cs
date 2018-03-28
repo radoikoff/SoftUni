@@ -46,7 +46,7 @@ namespace CustomList
                         Console.WriteLine(data.Min().ToString());
                         break;
                     case "Print":
-                        foreach (var item in data.Items)
+                        foreach (var item in data)
                         {
                             Console.WriteLine(item);
                         }
