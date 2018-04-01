@@ -5,11 +5,13 @@ VisualStudioVersion = 15.0.27428.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generics", "Generics\Generics.csproj", "{956E726B-37B4-4BC7-B22E-BC3DC789B088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountMethod", "CountMethod\CountMethod.csproj", "{A86E72B4-A55E-4A90-9A72-00D5972F7927}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountMethod", "CountMethod\CountMethod.csproj", "{A86E72B4-A55E-4A90-9A72-00D5972F7927}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomList", "CustomList\CustomList.csproj", "{5ADAA287-533F-4AA8-AE28-E4BA077B9095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomList", "CustomList\CustomList.csproj", "{5ADAA287-533F-4AA8-AE28-E4BA077B9095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tuple", "Tuple\Tuple.csproj", "{6080B6A4-5A2A-483B-804B-31161E3F63DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tuple", "Tuple\Tuple.csproj", "{6080B6A4-5A2A-483B-804B-31161E3F63DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenericCountMethod", "Generic Count Method\GenericCountMethod.csproj", "{D5AB9A7B-86B0-4D37-98C9-E3C1CC5E1CFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6080B6A4-5A2A-483B-804B-31161E3F63DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6080B6A4-5A2A-483B-804B-31161E3F63DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6080B6A4-5A2A-483B-804B-31161E3F63DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5AB9A7B-86B0-4D37-98C9-E3C1CC5E1CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5AB9A7B-86B0-4D37-98C9-E3C1CC5E1CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5AB9A7B-86B0-4D37-98C9-E3C1CC5E1CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5AB9A7B-86B0-4D37-98C9-E3C1CC5E1CFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
