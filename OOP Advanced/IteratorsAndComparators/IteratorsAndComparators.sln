@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetClinics", "PetClinics\Pe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListyIterator", "ListyIterator\ListyIterator.csproj", "{B3ADAF1A-6193-4D71-82CC-7144858EB0AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stack", "Stack\Stack.csproj", "{9C7A0045-5B9A-47CF-9808-9DF4DC1660BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{B3ADAF1A-6193-4D71-82CC-7144858EB0AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3ADAF1A-6193-4D71-82CC-7144858EB0AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3ADAF1A-6193-4D71-82CC-7144858EB0AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7A0045-5B9A-47CF-9808-9DF4DC1660BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7A0045-5B9A-47CF-9808-9DF4DC1660BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7A0045-5B9A-47CF-9808-9DF4DC1660BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7A0045-5B9A-47CF-9808-9DF4DC1660BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
