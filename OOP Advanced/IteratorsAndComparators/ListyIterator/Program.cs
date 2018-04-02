@@ -33,6 +33,10 @@ namespace ListyIterator
                     case "HasNext":
                         Console.WriteLine(listyIterator.HasNext());
                         break;
+                    case "PrintAll":
+                        listyIterator.PrintAll();
+                        break;
+
                 }
             }
         }
