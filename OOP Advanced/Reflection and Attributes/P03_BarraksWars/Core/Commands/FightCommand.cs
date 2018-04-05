@@ -7,8 +7,8 @@ namespace _03BarracksFactory.Core.Commands
 {
     public class FightCommand : Command
     {
-        public FightCommand(string[] data, IRepository repository, IUnitFactory unitfactory)
-            : base(data, repository, unitfactory)
+        public FightCommand(string[] data)
+            : base(data)
         {
         }
 

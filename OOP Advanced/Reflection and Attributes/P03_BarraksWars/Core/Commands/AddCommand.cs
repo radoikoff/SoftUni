@@ -5,11 +5,31 @@ using _03BarracksFactory.Contracts;
 
 namespace _03BarracksFactory.Core.Commands
 {
-    class AddCommand : Command
+    public class AddCommand : Command
     {
         public AddCommand(string[] data, IRepository repository, IUnitFactory unitfactory) 
-            : base(data, repository, unitfactory)
+            : base(data)
         {
+            this.Repository = repository;
+            this.UnitFactory = unitfactory;
+        }
+
+        [Inject]
+        private IRepository repository;
+
+        public IRepository Repository
+        {
+            get { return repository; }
+            private set { repository = value; }
+        }
+
+        [Inject]
+        private IUnitFactory unitFactory;
+
+        public IUnitFactory UnitFactory
+        {
+            get { return unitFactory; }
+            private set { unitFactory = value; }
         }
 
         public override string Execute()

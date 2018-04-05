@@ -7,13 +7,13 @@
 
     class Engine : IRunnable
     {
-        private IRepository repository;
-        private IUnitFactory unitFactory;
+        //private IRepository repository;
+        //private IUnitFactory unitFactory;
+        private ICommandInterpreter commandInterpreter;
 
-        public Engine(IRepository repository, IUnitFactory unitFactory)
+        public Engine(ICommandInterpreter commandInterpreter)
         {
-            this.repository = repository;
-            this.unitFactory = unitFactory;
+            this.commandInterpreter = commandInterpreter;
         }
         
         public void Run()
@@ -25,8 +25,19 @@
                     string input = Console.ReadLine();
                     string[] data = input.Split();
                     string commandName = data[0];
-                    string result = InterpredCommand(data, commandName);
-                    Console.WriteLine(result);
+                    IExecutable command = commandInterpreter.InterpretCommand(data, commandName);
+                    
+                    MethodInfo method = typeof(IExecutable).GetMethods().First();
+                    try
+                    {
+                        string result = (string)method.Invoke(command, null);
+                        Console.WriteLine(result);
+                    }
+                    catch (TargetInvocationException ex)
+                    {
+                        throw ex.InnerException;
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -35,38 +46,7 @@
             }
         }
 
-        // TODO: refactor for Problem 4
-        private string InterpredCommand(string[] data, string commandName)
-        {
-            Assembly assembly = Assembly.GetCallingAssembly();
-            Type commandType = assembly.GetTypes().FirstOrDefault(t => t.Name.ToLower() == commandName + "command");
-
-            if (commandType == null)
-            {
-                throw new ArgumentException("Invalid Command!");
-            }
-
-            if (!typeof(IExecutable).IsAssignableFrom(commandType))
-            {
-                throw new ArgumentException($"{commandName} is not a command!");
-            }
-
-            MethodInfo method = typeof(IExecutable).GetMethods().First();
-
-            var objectArgs = new object[] { data, this.repository, this.unitFactory };
-            var instance = Activator.CreateInstance(commandType, objectArgs );
-
-            try
-            {
-                string result = (string)method.Invoke(instance, null);
-                return result;
-            }
-            catch (TargetInvocationException ex)
-            {
-                throw ex.InnerException;
-            }
-            
-        }
+        
 
 
         //private string ReportCommand(string[] data)
