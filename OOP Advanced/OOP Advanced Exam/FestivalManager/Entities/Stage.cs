@@ -18,11 +18,11 @@
             this.performers = new List<IPerformer>();
         }
 
-        IReadOnlyCollection<ISet> IStage.Sets => this.sets.AsReadOnly();
+        public IReadOnlyCollection<ISet> Sets => this.sets.AsReadOnly();
 
-        IReadOnlyCollection<ISong> IStage.Songs => this.songs.AsReadOnly();
+        public IReadOnlyCollection<ISong> Songs => this.songs.AsReadOnly();
 
-        IReadOnlyCollection<IPerformer> IStage.Performers => this.performers.AsReadOnly();
+        public IReadOnlyCollection<IPerformer> Performers => this.performers.AsReadOnly();
 
 
         public void AddPerformer(IPerformer performer)
