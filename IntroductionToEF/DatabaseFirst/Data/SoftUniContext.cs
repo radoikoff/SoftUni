@@ -11,10 +11,15 @@ namespace P02_DatabaseFirst.Data
         {
         }
 
-        public SoftUniContext(DbContextOptions<SoftUniContext> options)
+        public SoftUniContext(DbContextOptions options)
             : base(options)
         {
         }
+
+        //public SoftUniContext(DbContextOptions<SoftUniContext> options)
+        //    : base(options)
+        //{
+        //}
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Department> Departments { get; set; }
