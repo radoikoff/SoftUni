@@ -14,27 +14,41 @@ namespace P02_DatabaseFirst
             using (var context = new SoftUniContext())
             {
 
-                var adresses = context.Addresses
-                    .OrderByDescending(a => a.Employees.Count)
-                    .ThenBy(a => a.Town.Name)
-                    .ThenBy(a => a.AddressText)
-                    .Select(a => new
+                var departments = context.Departments
+                    .Where(d => d.Employees.Count > 5)
+                    .OrderBy(d => d.Employees.Count)
+                    .ThenBy(d => d.Name)
+                    .Select(d => new
                     {
-                        AddressText = a.AddressText,
-                        TownName = a.Town.Name,
-                        Count = a.Employees.Count
+                        DepartmentName = d.Name,
+                        ManagerName = d.Manager.FirstName + " " + d.Manager.LastName,
+                        Emploees = d.Employees.Select(e => new
+                        {
+                            e.FirstName,
+                            e.LastName,
+                            e.JobTitle
+                        })
+                        .OrderBy(e => e.FirstName)
+                        .ThenBy(e => e.LastName)
                     })
-                    .Take(10)
                     .ToArray();
+
+
 
 
                 using (StreamWriter sw = new StreamWriter("../Result.txt"))
                 {
-                    foreach (var e in adresses)
+                    foreach (var d in departments)
                     {
-                        sw.WriteLine($"{e.AddressText}, {e.TownName} - {e.Count} employees");
+                        sw.WriteLine($"{d.DepartmentName} - {d.ManagerName}");
 
-                       
+                        foreach (var e in d.Emploees)
+                        {
+                            sw.WriteLine($"{e.FirstName} {e.LastName} - {e.JobTitle}");
+
+                        }
+                        sw.WriteLine(new string('-', 10));
+
                     }
                 }
             }
