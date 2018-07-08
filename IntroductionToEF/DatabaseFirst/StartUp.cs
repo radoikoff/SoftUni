@@ -2,6 +2,7 @@
 using System.Linq;
 using System;
 using System.IO;
+using P02_DatabaseFirst.Data.Models;
 
 namespace P02_DatabaseFirst
 {
@@ -11,10 +12,23 @@ namespace P02_DatabaseFirst
         {
             using (var context = new SoftUniContext())
             {
+                var address = new Address()
+                {
+                    AddressText = "Vitoshka 15",
+                    TownId = 4
+                };
+
+                context.Addresses.Add(address);
+
+                var user = context.Employees.FirstOrDefault(e => e.LastName == "Nakov");
+                user.Address = address;
+
+                context.SaveChanges();
+
                 var emploees = context.Employees
-                    .Where(e=>e.Salary>50000)
-                    .Select(e=>e.FirstName)
-                    .OrderBy(e => e)
+                    .OrderByDescending(e=>e.AddressId)
+                    .Take(10)                    
+                    .Select(e=>e.Address.AddressText)
                     .ToList();
 
                 using (StreamWriter sw = new StreamWriter("../Result.txt"))
