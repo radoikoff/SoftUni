@@ -13,16 +13,10 @@ namespace P02_DatabaseFirst
         {
             using (var context = new SoftUniContext())
             {
-              
+                string[] departments = new string[] { "Engineering", "Tool Design", "Marketing", "Information Services" };
+
                 var employees = context.Employees
-                                      .Where(e => e.FirstName.StartsWith("sa"))
-                                      .Select(e => new
-                                      {
-                                          e.FirstName,
-                                          e.LastName,
-                                          e.JobTitle,
-                                          e.Salary
-                                      })
+                                      .Where(e => departments.Any(d => d == e.Department.Name))
                                       .OrderBy(e => e.FirstName)
                                       .ThenBy(e => e.LastName)
                                       .ToArray();
@@ -32,11 +26,13 @@ namespace P02_DatabaseFirst
 
                     foreach (var e in employees)
                     {
-
-                        sw.WriteLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:F2})");
+                        e.Salary *= 1.12m;
+                        sw.WriteLine($"{e.FirstName} {e.LastName} (${e.Salary:F2})");
                     }
 
                 }
+
+                context.SaveChanges();
             }
         }
     }
