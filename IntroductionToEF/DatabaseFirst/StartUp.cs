@@ -13,26 +13,24 @@ namespace P02_DatabaseFirst
         {
             using (var context = new SoftUniContext())
             {
-                string[] departments = new string[] { "Engineering", "Tool Design", "Marketing", "Information Services" };
+                var projects = context.EmployeesProjects.Where(p => p.ProjectId == 2);
+                context.EmployeesProjects.RemoveRange(projects);
 
-                var employees = context.Employees
-                                      .Where(e => departments.Any(d => d == e.Department.Name))
-                                      .OrderBy(e => e.FirstName)
-                                      .ThenBy(e => e.LastName)
-                                      .ToArray();
+                var project = context.Projects.Find(2);
+                context.Projects.Remove(project);
+
+                context.SaveChanges();
+
+                var projectList = context.Projects.Take(10).ToArray();
 
                 using (StreamWriter sw = new StreamWriter("../Result.txt"))
                 {
-
-                    foreach (var e in employees)
+                    foreach (var e in projectList)
                     {
-                        e.Salary *= 1.12m;
-                        sw.WriteLine($"{e.FirstName} {e.LastName} (${e.Salary:F2})");
+                        sw.WriteLine(e.Name);
                     }
 
                 }
-
-                context.SaveChanges();
             }
         }
     }
