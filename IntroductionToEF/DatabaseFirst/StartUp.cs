@@ -14,33 +14,27 @@ namespace P02_DatabaseFirst
             using (var context = new SoftUniContext())
             {
 
-                var emploees = context.Employees.Where(e => e.EmployeesProjects.Any(x => x.Project.StartDate.Year >= 2001 && x.Project.StartDate.Year <= 2003))
-                    .Take(30)
-                    .Select(e => new
+                var adresses = context.Addresses
+                    .OrderByDescending(a => a.Employees.Count)
+                    .ThenBy(a => a.Town.Name)
+                    .ThenBy(a => a.AddressText)
+                    .Select(a => new
                     {
-                        EmploeeName = e.FirstName + " " + e.LastName,
-                        ManagerName = e.Manager.FirstName + " " + e.Manager.LastName,
-                        Projects = e.EmployeesProjects.Select(p => new
-                        {
-                            ProjectName = p.Project.Name,
-                            StartDate = p.Project.StartDate,
-                            EndDate = p.Project.EndDate
-                        })
+                        AddressText = a.AddressText,
+                        TownName = a.Town.Name,
+                        Count = a.Employees.Count
                     })
-                    .Take(30)
+                    .Take(10)
                     .ToArray();
 
 
                 using (StreamWriter sw = new StreamWriter("../Result.txt"))
                 {
-                    foreach (var e in emploees)
+                    foreach (var e in adresses)
                     {
-                        sw.WriteLine($"{e.EmploeeName} - Manager: {e.ManagerName}");
+                        sw.WriteLine($"{e.AddressText}, {e.TownName} - {e.Count} employees");
 
-                        foreach (var p in e.Projects)
-                        {
-                            sw.WriteLine($"--{p.ProjectName} - {p.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture)} - {p.EndDate?.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture) ?? "not finished"}");
-                        }
+                       
                     }
                 }
             }
