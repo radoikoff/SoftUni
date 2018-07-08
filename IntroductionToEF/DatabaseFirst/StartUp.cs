@@ -11,13 +11,17 @@ namespace P02_DatabaseFirst
         {
             using (var context = new SoftUniContext())
             {
-                var emploees = context.Employees.OrderBy(e => e.EmployeeId).ToList();
+                var emploees = context.Employees
+                    .Where(e=>e.Salary>50000)
+                    .Select(e=>e.FirstName)
+                    .OrderBy(e => e)
+                    .ToList();
 
                 using (StreamWriter sw = new StreamWriter("../Result.txt"))
                 {
                     foreach (var e in emploees)
                     {
-                        sw.WriteLine($"{e.FirstName} {e.LastName} {e.MiddleName} {e.JobTitle} {e.Salary:F2}");
+                        sw.WriteLine(e);
                     }
                 }
 
