@@ -13,19 +13,16 @@ namespace P02_DatabaseFirst
         {
             using (var context = new SoftUniContext())
             {
-                var projects = context.EmployeesProjects.Where(p => p.ProjectId == 2);
-                context.EmployeesProjects.RemoveRange(projects);
+                var employee147 = context.Employees.Find(147);
+                var projects = context.Projects
+                                      .Where(p => p.EmployeesProjects.Any(ep => ep.EmployeeId == 147))
+                                      .OrderBy(p=>p.Name);
 
-                var project = context.Projects.Find(2);
-                context.Projects.Remove(project);
-
-                context.SaveChanges();
-
-                var projectList = context.Projects.Take(10).ToArray();
 
                 using (StreamWriter sw = new StreamWriter("../Result.txt"))
                 {
-                    foreach (var e in projectList)
+                    sw.WriteLine($"{employee147.FirstName} {employee147.LastName} - {employee147.JobTitle}");
+                    foreach (var e in projects)
                     {
                         sw.WriteLine(e.Name);
                     }
