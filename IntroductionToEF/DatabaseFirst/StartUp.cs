@@ -13,48 +13,34 @@ namespace P02_DatabaseFirst
         {
             using (var context = new SoftUniContext())
             {
-
-                var departments = context.Departments
-                    .Where(d => d.Employees.Count > 5)
-                    .OrderBy(d => d.Employees.Count)
-                    .ThenBy(d => d.Name)
-                    .Select(d => new
-                    {
-                        DepartmentName = d.Name,
-                        ManagerName = d.Manager.FirstName + " " + d.Manager.LastName,
-                        Emploees = d.Employees.Select(e => new
-                        {
-                            e.FirstName,
-                            e.LastName,
-                            e.JobTitle
-                        })
-                        .OrderBy(e => e.FirstName)
-                        .ThenBy(e => e.LastName)
-                    })
-                    .ToArray();
-
-
-
+              
+                var employees = context.Employees
+                                      .Where(e => e.FirstName.StartsWith("sa"))
+                                      .Select(e => new
+                                      {
+                                          e.FirstName,
+                                          e.LastName,
+                                          e.JobTitle,
+                                          e.Salary
+                                      })
+                                      .OrderBy(e => e.FirstName)
+                                      .ThenBy(e => e.LastName)
+                                      .ToArray();
 
                 using (StreamWriter sw = new StreamWriter("../Result.txt"))
                 {
-                    foreach (var d in departments)
+
+                    foreach (var e in employees)
                     {
-                        sw.WriteLine($"{d.DepartmentName} - {d.ManagerName}");
 
-                        foreach (var e in d.Emploees)
-                        {
-                            sw.WriteLine($"{e.FirstName} {e.LastName} - {e.JobTitle}");
-
-                        }
-                        sw.WriteLine(new string('-', 10));
-
+                        sw.WriteLine($"{e.FirstName} {e.LastName} - {e.JobTitle} - (${e.Salary:F2})");
                     }
+
                 }
             }
         }
-
     }
+
 }
 
 
