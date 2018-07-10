@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180710203702_DoctorsAdded.cs" />
+    <Compile Remove="Migrations\20180710205158_DoctorsAdded.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="2.1.1" />
     <PackageReference Include="microsoft.entityframeworkcore.tools" Version="2.1.1" />
   </ItemGroup>
