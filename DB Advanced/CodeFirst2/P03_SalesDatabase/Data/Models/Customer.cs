@@ -19,6 +19,6 @@ namespace P03_SalesDatabase.Data.Models
 
         public string CreditCardNumber { get; set; }
 
-        public IEnumerable<Sale> Sales { get; set; }
+        public ICollection<Sale> Sales { get; set; }
     }
 }

@@ -21,7 +21,7 @@ namespace P03_SalesDatabase.Data.Models
 
         public decimal? Price { get; set; }
 
-        public IEnumerable<Sale> Sales { get; set; }
+        public ICollection<Sale> Sales { get; set; }
 
     }
 }
