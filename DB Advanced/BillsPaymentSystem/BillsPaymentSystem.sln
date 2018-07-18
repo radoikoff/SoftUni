@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P01_BillsPaymentSystem.Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P01_BillsPaymentSystem.Data.Models", "P01_BillsPaymentSystem.Data.Models\P01_BillsPaymentSystem.Data.Models.csproj", "{3612010A-87E3-45E0-B66C-664ECCC3D89F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P01_BillsPaymentSystem.Initializer", "P01_BillsPaymentSystem.Initializer\P01_BillsPaymentSystem.Initializer.csproj", "{CBC891D5-EF58-4910-A1E7-DD1CB5D55DAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3612010A-87E3-45E0-B66C-664ECCC3D89F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3612010A-87E3-45E0-B66C-664ECCC3D89F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3612010A-87E3-45E0-B66C-664ECCC3D89F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC891D5-EF58-4910-A1E7-DD1CB5D55DAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC891D5-EF58-4910-A1E7-DD1CB5D55DAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC891D5-EF58-4910-A1E7-DD1CB5D55DAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC891D5-EF58-4910-A1E7-DD1CB5D55DAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
