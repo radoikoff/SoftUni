@@ -9,12 +9,14 @@ namespace P01_BillsPaymentSystem.Initializer
         {
             var paymentMethods = new PaymentMethod[]
             {
-                new PaymentMethod(){ UserId = 1, Type = PaymentMethodType.BankAccount, BankAccountId = 1, CreditCardId = null},
-                new PaymentMethod(){ UserId = 1, Type = PaymentMethodType.CreditCard, BankAccountId = null, CreditCardId = 1},
-                new PaymentMethod(){ UserId = 2, Type = PaymentMethodType.BankAccount, BankAccountId = 2, CreditCardId = null},
-                new PaymentMethod(){ UserId = 3, Type = PaymentMethodType.CreditCard, BankAccountId = null, CreditCardId = 2},
-                new PaymentMethod(){ UserId = 4, Type = PaymentMethodType.CreditCard, BankAccountId = null, CreditCardId = 3},
-                new PaymentMethod(){ UserId = 5, Type = PaymentMethodType.CreditCard, BankAccountId = null, CreditCardId = 4},
+                new PaymentMethod(){ UserId = 1, Type = PaymentMethodType.BankAccount, BankAccountId = 1},
+                new PaymentMethod(){ UserId = 1, Type = PaymentMethodType.BankAccount, BankAccountId = 2},
+                new PaymentMethod(){ UserId = 1, Type = PaymentMethodType.CreditCard,  CreditCardId = 1},
+                new PaymentMethod(){ UserId = 1, Type = PaymentMethodType.CreditCard,  CreditCardId = 5},
+                new PaymentMethod(){ UserId = 2, Type = PaymentMethodType.BankAccount, BankAccountId = 3},
+                new PaymentMethod(){ UserId = 3, Type = PaymentMethodType.CreditCard, CreditCardId = 2},
+                new PaymentMethod(){ UserId = 4, Type = PaymentMethodType.CreditCard, CreditCardId = 3},
+                new PaymentMethod(){ UserId = 5, Type = PaymentMethodType.CreditCard, CreditCardId = 4},
             };
 
             return paymentMethods;
