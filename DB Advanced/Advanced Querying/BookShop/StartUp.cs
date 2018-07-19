@@ -16,7 +16,8 @@
                 //string command = Console.ReadLine();
                 //string result = GetBooksByAgeRestriction(db, command);
 
-                string result = GetBooksByPrice(db);
+                int year = int.Parse(Console.ReadLine());
+                string result = GetBooksNotRealeasedIn(db, year);
                 Console.WriteLine(result);
 
             }
@@ -62,6 +63,17 @@
                                .Select(b => $"{b.Title} - ${b.Price:F2}")
                                .ToArray();
 
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksNotRealeasedIn(BookShopContext context, int year)
+        {
+            var books = context.Books
+                   .Where(b => b.ReleaseDate.Value.Year != year)
+                   .OrderBy(b => b.BookId)
+                   .Select(b => b.Title)
+                   .ToArray();
 
             return string.Join(Environment.NewLine, books);
         }
