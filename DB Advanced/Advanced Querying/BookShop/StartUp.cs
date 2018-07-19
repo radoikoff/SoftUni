@@ -3,6 +3,7 @@
     using BookShop.Data;
     using BookShop.Initializer;
     using BookShop.Models;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Globalization;
     using System.Linq;
@@ -18,7 +19,7 @@
                 //string result = GetBooksByAgeRestriction(db, command);
 
                 //int year = int.Parse(Console.ReadLine());
-                string result = GetAuthorNamesEndingIn(db, command);
+                string result = GetBookTitlesContaining(db, command);
 
                 Console.WriteLine(result);
 
@@ -121,6 +122,17 @@
                                  .ToArray();
 
             return string.Join(Environment.NewLine, authors);
+        }
+
+        public static string GetBookTitlesContaining(BookShopContext context, string input)
+        {
+            var books = context.Books
+                               .Where(b => EF.Functions.Like(b.Title, $"%{input}%"))
+                               .Select(b => b.Title)
+                               .OrderBy(b => b)
+                               .ToArray();
+
+            return string.Join(Environment.NewLine, books);
         }
     }
 }
