@@ -16,7 +16,7 @@
                 //string command = Console.ReadLine();
                 //string result = GetBooksByAgeRestriction(db, command);
 
-                string result = GetGoldenBooks(db);
+                string result = GetBooksByPrice(db);
                 Console.WriteLine(result);
 
             }
@@ -45,6 +45,23 @@
                    .OrderBy(b => b.BookId)
                    .Select(b => b.Title)
                    .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksByPrice(BookShopContext context)
+        {
+            var books = context.Books
+                               .Where(b => b.Price > 40)
+                               .Select(b => new
+                               {
+                                   b.Title,
+                                   b.Price
+                               })
+                               .OrderByDescending(b => b.Price)
+                               .Select(b => $"{b.Title} - ${b.Price:F2}")
+                               .ToArray();
+
 
             return string.Join(Environment.NewLine, books);
         }
