@@ -18,7 +18,7 @@
                 //string result = GetBooksByAgeRestriction(db, command);
 
                 //int year = int.Parse(Console.ReadLine());
-                string result = GetBooksReleasedBefore(db, command);
+                string result = GetAuthorNamesEndingIn(db, command);
 
                 Console.WriteLine(result);
 
@@ -104,6 +104,23 @@
                                .ToArray();
 
             return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetAuthorNamesEndingIn(BookShopContext context, string input)
+        {
+            var authors = context.Authors
+                                 .Where(a => a.FirstName.EndsWith(input, StringComparison.InvariantCultureIgnoreCase))
+                                 .Select(a => new
+                                 {
+                                     a.FirstName,
+                                     a.LastName
+                                 })
+                                 .OrderBy(a => a.FirstName)
+                                 .ThenBy(a => a.LastName)
+                                 .Select(a => $"{a.FirstName} {a.LastName}")
+                                 .ToArray();
+
+            return string.Join(Environment.NewLine, authors);
         }
     }
 }
