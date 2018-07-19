@@ -13,11 +13,12 @@
             using (var db = new BookShopContext())
             {
                 //DbInitializer.ResetDatabase(db);
-                //string command = Console.ReadLine();
+                string command = Console.ReadLine();
                 //string result = GetBooksByAgeRestriction(db, command);
 
-                int year = int.Parse(Console.ReadLine());
-                string result = GetBooksNotRealeasedIn(db, year);
+                //int year = int.Parse(Console.ReadLine());
+                string result = GetBooksByCategory(db, command);
+
                 Console.WriteLine(result);
 
             }
@@ -74,6 +75,19 @@
                    .OrderBy(b => b.BookId)
                    .Select(b => b.Title)
                    .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksByCategory(BookShopContext context, string input)
+        {
+            string[] categories = input.ToLower().Split(" ", StringSplitOptions.RemoveEmptyEntries).ToArray();
+
+            var books = context.Books
+                  .Where(b => b.BookCategories.Any(c => categories.Contains(c.Category.Name.ToLower())))
+                  .Select(b => b.Title)
+                  .OrderBy(b => b)
+                  .ToArray();
 
             return string.Join(Environment.NewLine, books);
         }
