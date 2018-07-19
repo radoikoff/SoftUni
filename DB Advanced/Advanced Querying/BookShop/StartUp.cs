@@ -4,6 +4,7 @@
     using BookShop.Initializer;
     using BookShop.Models;
     using System;
+    using System.Globalization;
     using System.Linq;
 
     public class StartUp
@@ -17,7 +18,7 @@
                 //string result = GetBooksByAgeRestriction(db, command);
 
                 //int year = int.Parse(Console.ReadLine());
-                string result = GetBooksByCategory(db, command);
+                string result = GetBooksReleasedBefore(db, command);
 
                 Console.WriteLine(result);
 
@@ -88,6 +89,19 @@
                   .Select(b => b.Title)
                   .OrderBy(b => b)
                   .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksReleasedBefore(BookShopContext context, string date)
+        {
+            DateTime inputDate = DateTime.ParseExact(date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+
+            var books = context.Books
+                               .Where(b => b.ReleaseDate.Value < inputDate)
+                               .OrderByDescending(b => b.ReleaseDate)
+                               .Select(b => $"{b.Title} - {b.EditionType} - ${b.Price:F2}")
+                               .ToArray();
 
             return string.Join(Environment.NewLine, books);
         }
