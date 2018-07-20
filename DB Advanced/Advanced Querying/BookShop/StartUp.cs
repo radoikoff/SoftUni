@@ -20,9 +20,10 @@
                 //string result = GetBooksByAgeRestriction(db, command);
 
                 //int lenght = int.Parse(Console.ReadLine());
-                var result = GetMostRecentBooks(db);
+                IncreasePrices(db);
+                //var result = GetMostRecentBooks(db);
 
-                Console.WriteLine(result);
+                //Console.WriteLine(result);
 
             }
 
@@ -233,6 +234,20 @@
             }
 
             return sb.ToString().TrimEnd();
+        }
+
+        public static void IncreasePrices(BookShopContext context)
+        {
+            var books = context.Books
+                               .Where(b => b.ReleaseDate.Value.Year < 2010)
+                               .ToArray();
+
+            foreach (var book in books)
+            {
+                book.Price += 5m;
+            }
+
+            context.SaveChanges();
         }
     }
 }
