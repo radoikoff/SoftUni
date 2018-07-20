@@ -19,7 +19,7 @@
                 //string result = GetBooksByAgeRestriction(db, command);
 
                 //int year = int.Parse(Console.ReadLine());
-                string result = GetBookTitlesContaining(db, command);
+                string result = GetBooksByAuthor(db, command);
 
                 Console.WriteLine(result);
 
@@ -133,6 +133,18 @@
                                .ToArray();
 
             return string.Join(Environment.NewLine, books);
+        }
+
+        public static string GetBooksByAuthor(BookShopContext context, string input)
+        {
+            var books = context.Books
+                               .Include(x => x.Author)
+                               .Where(b => EF.Functions.Like(b.Author.LastName, $"{input}%"))
+                               .Select(x => $"{x.Title} ({x.Author.FirstName} {x.Author.LastName})")
+                               .ToArray();
+
+            return string.Join(Environment.NewLine, books);
+
         }
     }
 }
