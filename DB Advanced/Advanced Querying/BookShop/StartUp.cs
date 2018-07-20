@@ -20,7 +20,7 @@
                 //string result = GetBooksByAgeRestriction(db, command);
 
                 //int lenght = int.Parse(Console.ReadLine());
-                var result = CountCopiesByAuthor(db);
+                var result = GetTotalProfitByCategory(db);
 
                 Console.WriteLine(result);
 
@@ -177,6 +177,28 @@
 
             return sb.ToString().TrimEnd();
 
+        }
+
+        public static string GetTotalProfitByCategory(BookShopContext context)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            var categories = context.Categories
+                                 .Select(c => new
+                                 {
+                                     c.Name,
+                                     TotalProfit = c.CategoryBooks.Sum(b => b.Book.Price * b.Book.Copies)
+                                 })
+                                 .OrderByDescending(x => x.TotalProfit)
+                                 .ThenBy(x => x.Name)
+                                 .ToArray();
+
+            foreach (var category in categories)
+            {
+                sb.AppendLine($"{category.Name} ${category.TotalProfit:F2}");
+            }
+
+            return sb.ToString().TrimEnd();
         }
     }
 }
