@@ -15,11 +15,11 @@
             using (var db = new BookShopContext())
             {
                 //DbInitializer.ResetDatabase(db);
-                string command = Console.ReadLine();
+                //string command = Console.ReadLine();
                 //string result = GetBooksByAgeRestriction(db, command);
 
-                //int year = int.Parse(Console.ReadLine());
-                string result = GetBooksByAuthor(db, command);
+                int lenght = int.Parse(Console.ReadLine());
+                var result = CountBooks(db, lenght);
 
                 Console.WriteLine(result);
 
@@ -145,6 +145,15 @@
 
             return string.Join(Environment.NewLine, books);
 
+        }
+
+        public static int CountBooks(BookShopContext context, int lengthCheck)
+        {
+            var booksCount = context.Books
+                                    .Where(b => b.Title.Length > lengthCheck)
+                                    .Count();
+
+            return booksCount;
         }
     }
 }
