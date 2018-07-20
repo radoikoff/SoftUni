@@ -21,9 +21,10 @@
 
                 //int lenght = int.Parse(Console.ReadLine());
                 IncreasePrices(db);
+                var result = RemoveBooks(db);
                 //var result = GetMostRecentBooks(db);
 
-                //Console.WriteLine(result);
+                Console.WriteLine(result);
 
             }
 
@@ -248,6 +249,19 @@
             }
 
             context.SaveChanges();
+        }
+
+        public static int RemoveBooks(BookShopContext context)
+        {
+            var books = context.Books
+                              .Where(b => b.Copies < 4200)
+                              .ToArray();
+
+            context.RemoveRange(books);
+
+            context.SaveChanges();
+
+            return books.Length;
         }
     }
 }
