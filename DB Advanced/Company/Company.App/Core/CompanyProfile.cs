@@ -12,6 +12,10 @@ namespace Company.App.Core
         public CompanyProfile()
         {
             CreateMap<Employee, EmployeeDto>().ReverseMap();
+            CreateMap<Employee, ManagerDto>()
+                .ForMember(dest => dest.EmployeesDto, src => src.MapFrom(x => x.ManagerEmployees))
+                .ReverseMap();
+            CreateMap<Employee, EmployeePersonalInfoDto>().ReverseMap();
         }
     }
 }

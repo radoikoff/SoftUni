@@ -27,6 +27,12 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Employee>(e =>
+            {
+                e.HasOne(x => x.Manager)
+                 .WithMany(x => x.ManagerEmployees)
+                 .HasForeignKey(x => x.ManagerId);
+            });
         }
 
 

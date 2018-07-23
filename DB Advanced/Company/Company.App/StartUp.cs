@@ -29,6 +29,7 @@
             serviceCollection.AddTransient<IDbInitializerService, DbInitializerService>();
             serviceCollection.AddTransient<ICommandInterpreter, CommandInterpreter>();
             serviceCollection.AddTransient<IEmployeeController, EmployeeController>();
+            serviceCollection.AddTransient<IManagerController, ManagerController>();
 
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 
