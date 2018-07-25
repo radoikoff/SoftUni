@@ -10,6 +10,7 @@
     using Company.Models;
     using System.Linq;
     using AutoMapper.QueryableExtensions;
+    using Microsoft.EntityFrameworkCore;
 
     public class EmployeeController : IEmployeeController
     {
@@ -82,6 +83,23 @@
             var employeePersonalInfoDto = mapper.Map<EmployeePersonalInfoDto>(employee);
 
             return employeePersonalInfoDto;
+        }
+
+        public ICollection<EmployeeWithManagerDto> GetEmployeesInfoByAge(int age)
+        {
+            if (age <= 0)
+            {
+                throw new ArgumentException("Provided age cannot be negative!");
+            }
+
+            var employees = context.Employees
+                                   .Include(x => x.Manager)
+                                   .Where(e => (DateTime.Now - e.BirthDay.Value).TotalDays > age * 365)
+                                   .ProjectTo<EmployeeWithManagerDto>(mapper.ConfigurationProvider)
+                                   .ToArray();
+
+            return employees;
+
         }
     }
 }

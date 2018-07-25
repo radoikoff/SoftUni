@@ -2,6 +2,7 @@
 {
     using DTOs;
     using System;
+    using System.Collections.Generic;
 
     public interface IEmployeeController
     {
@@ -14,5 +15,7 @@
         EmployeeDto GetEmployeeInfo(int employeeId);
 
         EmployeePersonalInfoDto GetEmployeePersonalInfo(int employeeId);
+
+        ICollection<EmployeeWithManagerDto> GetEmployeesInfoByAge(int age);
     }
 }

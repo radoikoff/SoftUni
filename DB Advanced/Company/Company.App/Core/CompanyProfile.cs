@@ -13,9 +13,13 @@ namespace Company.App.Core
         {
             CreateMap<Employee, EmployeeDto>().ReverseMap();
             CreateMap<Employee, ManagerDto>()
-                .ForMember(dest => dest.EmployeesDto, src => src.MapFrom(x => x.ManagerEmployees))
+                .ForMember(dest => dest.EmployeesDto, from => from.MapFrom(x => x.ManagerEmployees))
                 .ReverseMap();
             CreateMap<Employee, EmployeePersonalInfoDto>().ReverseMap();
+            CreateMap<Employee, EmployeeWithManagerDto>()
+                //.ForMember(dest => dest.ManagerFirstName, from => from.MapFrom(x => x.Manager.FirstName))
+                //.ForMember(dest => dest.ManagerLastName, from => from.MapFrom(x => x.Manager.LastName))
+                .ReverseMap();
         }
     }
 }
