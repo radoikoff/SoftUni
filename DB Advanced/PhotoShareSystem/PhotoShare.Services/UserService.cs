@@ -73,7 +73,7 @@
         {
             var user = this.ByUsername<User>(username);
 
-            this.context.Users.Remove(user);   //OR  user.IsDeleted = true;
+            user.IsDeleted = true;
             this.context.SaveChanges();
         }
 
