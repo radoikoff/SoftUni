@@ -12,6 +12,7 @@
             CreateMap<User, User>();
             CreateMap<Town, Town>();
             CreateMap<Tag, Tag>();
+            CreateMap<Album, Album>();
 
             CreateMap<Town, TownDto>().ReverseMap();
 
