@@ -4,6 +4,7 @@
     using System.Linq;
     using Contracts;
     using PhotoShare.Client.Core.Dtos;
+    using PhotoShare.Models;
     using PhotoShare.Services.Contracts;
 
     public class AddFriendCommand : ICommand
@@ -38,7 +39,7 @@
             var friend = this.userService.ByUsername<UserFriendsDto>(friendName);
 
             bool isSendRequestFromUser = user.Friends.Any(x => x.Username == friend.Username);
-            bool isSendRequestFromFriend = friend.Friends.Any(x => x.Username == friend.Username);
+            bool isSendRequestFromFriend = friend.Friends.Any(x => x.Username == user.Username);
 
             if (isSendRequestFromUser && isSendRequestFromFriend)
             {
