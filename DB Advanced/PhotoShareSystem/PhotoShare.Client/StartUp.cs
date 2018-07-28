@@ -38,6 +38,7 @@
 
             serviceCollection.AddTransient<ICommandInterpreter, CommandInterpreter>();
             serviceCollection.AddTransient<IDatabaseInitializerService, DatabaseInitializerService>();
+            serviceCollection.AddSingleton<ISessionService, SessionService>();
 
             serviceCollection.AddTransient<IAlbumRoleService, AlbumRoleService>();
             serviceCollection.AddTransient<IAlbumService, AlbumService>();
