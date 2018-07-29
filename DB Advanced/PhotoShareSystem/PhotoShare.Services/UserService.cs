@@ -66,21 +66,19 @@
 
         public void ChangePassword(int userId, string password)
         {
-            var user = this.ById<User>(userId);
+            var user = this.context.Users.Find(userId);
 
             user.Password = password;
 
             this.context.SaveChanges();
         }
 
-        public void Delete(string username)
+        public void Delete(int userId)
         {
-            var user = this.ByUsername<User>(username);
+            var user = this.context.Users.Find(userId);
 
             user.IsDeleted = true;
             this.context.SaveChanges();
-
-            //to reset the session
         }
 
         public User Register(string username, string password, string email)
@@ -101,7 +99,7 @@
 
         public void SetBornTown(int userId, int townId)
         {
-            var user = this.ById<User>(userId);
+            var user = this.context.Users.Find(userId);
 
             user.BornTownId = townId;
 
@@ -110,7 +108,7 @@
 
         public void SetCurrentTown(int userId, int townId)
         {
-            var user = this.ById<User>(userId);
+            var user = this.context.Users.Find(userId);
 
             user.CurrentTownId = townId;
 
@@ -124,5 +122,6 @@
                            .Where(predicate)
                            .AsQueryable()
                            .ProjectTo<TModel>(this.mapper.ConfigurationProvider);
+
     }
 }

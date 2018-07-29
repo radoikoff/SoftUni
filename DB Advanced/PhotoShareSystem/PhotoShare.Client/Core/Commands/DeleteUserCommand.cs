@@ -36,7 +36,7 @@
                 throw new InvalidOperationException("Invalid credentials!");
             }
 
-            this.userService.Delete(username);
+            this.userService.Delete(userId);
 
 
             return $"User {username} was deleted from the database!";

@@ -14,7 +14,7 @@
 
         User Register(string username, string password, string email);
 
-        void Delete(string username);
+        void Delete(int userId);
 
         Friendship AddFriend(int userId, int friendId);
 
