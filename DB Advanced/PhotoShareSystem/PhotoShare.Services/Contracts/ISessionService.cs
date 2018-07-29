@@ -8,5 +8,6 @@
         void Login(int userId);
         void Logout();
         bool IsLoggedIn();
+        bool IsLoggedIn(int userId);
     }
 }

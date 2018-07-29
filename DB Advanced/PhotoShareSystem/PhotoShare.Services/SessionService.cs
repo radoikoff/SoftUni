@@ -32,5 +32,14 @@
         {
             return this.User != null;
         }
+
+        public bool IsLoggedIn(int UserId)
+        {
+            if (this.User == null)
+            {
+                return false;
+            }
+            return this.User.Id == UserId;
+        }
     }
 }
