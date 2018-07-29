@@ -1,22 +1,27 @@
 ﻿namespace PhotoShare.Client.Core.Commands
 {
     using System;
+    using System.Linq;
     using Contracts;
     using PhotoShare.Client.Core.Dtos;
     using PhotoShare.Client.Utilities;
+    using PhotoShare.Models;
+    using PhotoShare.Models.Enums;
     using PhotoShare.Services.Contracts;
 
     public class AddTagToCommand : ICommand
     {
         private readonly ITagService tagService;
-        private readonly IAlbumService albumeService;
+        private readonly IAlbumService albumService;
         private readonly IAlbumTagService albumTagService;
+        private readonly ISessionService sessionService;
 
-        public AddTagToCommand(ITagService tagService, IAlbumService albumeService, IAlbumTagService albumTagService)
+        public AddTagToCommand(ITagService tagService, IAlbumService albumService, IAlbumTagService albumTagService, ISessionService sessionService)
         {
             this.tagService = tagService;
-            this.albumeService = albumeService;
+            this.albumService = albumService;
             this.albumTagService = albumTagService;
+            this.sessionService = sessionService;
         }
 
         // AddTagTo <albumName> <tag>
@@ -27,7 +32,7 @@
 
             var newTagName = tagName.ValidateOrTransform();
 
-            bool albumExists = this.albumeService.Exists(albumName);
+            bool albumExists = this.albumService.Exists(albumName);
             bool tagExists = this.tagService.Exists(newTagName);
 
             if (!albumExists || !tagExists)
@@ -35,7 +40,14 @@
                 throw new ArgumentException($"Either tag or album do not exist!");
             }
 
-            var albumId = this.albumeService.ByName<AlbumDto>(albumName).Id;
+            var album = this.albumService.ByName<AlbumDto>(albumName);
+
+            if (!this.sessionService.IsLoggedIn(album.AlbumOwnerId))
+            {
+                throw new InvalidOperationException("Invalid credentials!");
+            }
+
+            var albumId = album.Id;
             var tagId = this.tagService.ByName<AlbumDto>(newTagName).Id;
 
             this.albumTagService.AddTagTo(albumId, tagId);

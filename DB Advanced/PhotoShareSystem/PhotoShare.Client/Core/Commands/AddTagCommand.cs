@@ -8,14 +8,21 @@
     public class AddTagCommand : ICommand
     {
         private readonly ITagService tagService;
+        private readonly ISessionService sessionService;
 
-        public AddTagCommand(ITagService tagService)
+        public AddTagCommand(ITagService tagService, ISessionService sessionService)
         {
             this.tagService = tagService;
+            this.sessionService = sessionService;
         }
 
         public string Execute(string[] args)
         {
+            if (!this.sessionService.IsLoggedIn())
+            {
+                throw new InvalidOperationException("Invalid credentials!");
+            }
+
             string tagName = args[0];
 
             bool tagExists = this.tagService.Exists(tagName);

@@ -9,11 +9,13 @@
     {
         private readonly IPictureService pictureService;
         private readonly IAlbumService albumService;
+        private readonly ISessionService sessionService;
 
-        public UploadPictureCommand(IPictureService pictureService, IAlbumService albumService)
+        public UploadPictureCommand(IPictureService pictureService, IAlbumService albumService, ISessionService sessionService)
         {
             this.pictureService = pictureService;
             this.albumService = albumService;
+            this.sessionService = sessionService;
         }
 
         // UploadPicture <albumName> <pictureTitle> <pictureFilePath>
@@ -30,9 +32,15 @@
                 throw new ArgumentException($"Album {albumName} not found!");
             }
 
-            var albumId = this.albumService.ByName<AlbumDto>(albumName).Id;
+            var album = this.albumService.ByName<AlbumDto>(albumName);
 
-            var picture = this.pictureService.Create(albumId, pictureTitle, path);
+            if (!this.sessionService.IsLoggedIn(album.AlbumOwnerId))
+            {
+                throw new InvalidOperationException("Invalid credentials!");
+            }
+
+
+            var picture = this.pictureService.Create(album.Id, pictureTitle, path);
 
             return $"Picture {pictureTitle} added to {albumName}!";
         }

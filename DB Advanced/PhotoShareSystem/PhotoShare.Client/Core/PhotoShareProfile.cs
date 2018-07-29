@@ -4,6 +4,8 @@
     using Commands;
     using Models;
     using Dtos;
+    using System.Linq;
+    using PhotoShare.Models.Enums;
 
     public class PhotoShareProfile : Profile
     {
@@ -16,7 +18,9 @@
 
             CreateMap<Town, TownDto>().ReverseMap();
 
-            CreateMap<Album, AlbumDto>().ReverseMap();
+            CreateMap<Album, AlbumDto>()
+                .ForMember(dest=>dest.AlbumOwnerId, opt=>opt.MapFrom(x=>x.AlbumRoles.FirstOrDefault(r => r.Role == Role.Owner).UserId))
+                .ReverseMap();
 
             CreateMap<Tag, TagDto>().ReverseMap();
 

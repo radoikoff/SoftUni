@@ -8,13 +8,15 @@
 
     public class ModifyUserCommand : ICommand
     {
+        private readonly ISessionService sessionService;
         private readonly IUserService userService;
         private readonly ITownService townService;
 
-        public ModifyUserCommand(IUserService userService, ITownService townService)
+        public ModifyUserCommand(IUserService userService, ITownService townService, ISessionService sessionService)
         {
             this.userService = userService;
             this.townService = townService;
+            this.sessionService = sessionService;
         }
 
         // ModifyUser <username> <property> <new value>
@@ -37,6 +39,11 @@
             }
 
             var userId = this.userService.ByUsername<UserDto>(username).Id;
+
+            if (!this.sessionService.IsLoggedIn(userId))
+            {
+                throw new InvalidOperationException("Invalid credentials!");
+            }
 
             if (property.ToLower() == "password")
             {
