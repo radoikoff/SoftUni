@@ -6,6 +6,7 @@
     using Models.Enums;
     using Data;
     using Contracts;
+    using System.Linq;
 
     public class AlbumRoleService : IAlbumRoleService
     {
@@ -32,6 +33,15 @@
             this.context.SaveChanges();
 
             return albumRole;
+        }
+
+        public bool IsExists(int albumId, int userId, string permission)
+        {
+            var roleAsEnum = Enum.Parse<Role>(permission);
+
+            var entity = this.context.AlbumRoles.FirstOrDefault(x => x.AlbumId == albumId && x.UserId == userId && x.Role == roleAsEnum);
+
+            return entity != null;
         }
     }
 }
