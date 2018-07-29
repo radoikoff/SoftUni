@@ -1,5 +1,6 @@
 ﻿namespace PhotoShare.Services
 {
+    using AutoMapper;
     using AutoMapper.QueryableExtensions;
     using Microsoft.EntityFrameworkCore;
     using PhotoShare.Data;
@@ -12,10 +13,12 @@
     public class UserService : IUserService
     {
         private readonly PhotoShareContext context;
+        private readonly IMapper mapper;
 
-        public UserService(PhotoShareContext context)
+        public UserService(PhotoShareContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public TModel ById<TModel>(int id)
@@ -76,6 +79,8 @@
 
             user.IsDeleted = true;
             this.context.SaveChanges();
+
+            //to reset the session
         }
 
         public User Register(string username, string password, string email)
@@ -118,6 +123,6 @@
                            .Include(u => u.AlbumRoles)
                            .Where(predicate)
                            .AsQueryable()
-                           .ProjectTo<TModel>();
+                           .ProjectTo<TModel>(this.mapper.ConfigurationProvider);
     }
 }

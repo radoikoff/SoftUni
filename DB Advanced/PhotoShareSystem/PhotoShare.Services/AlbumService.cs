@@ -1,6 +1,7 @@
 ﻿namespace PhotoShare.Services
 {
     using AutoMapper.QueryableExtensions;
+    using Microsoft.EntityFrameworkCore;
     using PhotoShare.Data;
     using PhotoShare.Models;
     using PhotoShare.Models.Enums;
@@ -73,6 +74,9 @@
 
         private IEnumerable<TModel> By<TModel>(Func<Album, bool> predicate)
             => this.context.Albums
+                           .Include(a=>a.AlbumRoles)
+                           .Include(a=>a.AlbumTags)
+                           .Include(a=>a.Pictures)
                            .Where(predicate)
                            .AsQueryable()
                            .ProjectTo<TModel>();
