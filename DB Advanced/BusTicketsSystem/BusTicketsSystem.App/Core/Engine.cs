@@ -4,6 +4,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Contracts;
     using Services.Contracts;
+    using System.Data.SqlClient;
 
     public class Engine : IEngine
     {
@@ -18,23 +19,24 @@
         {
             var initializeService = this.serviceProvider.GetService<IDatabaseInitializerService>();
             initializeService.InitializeDatabase();
-            initializeService.Seed();
+            //initializeService.Seed();
 
             var commandInterpreter = this.serviceProvider.GetService<ICommandInterpreter>();
 
             while (true)
             {
-                //try
-                //{
+                try
+                {
                     Console.WriteLine("EnterCommand:");
                     string[] input = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
                     string result = commandInterpreter.Read(input);
                     Console.WriteLine(result);
-                //}
-                //catch (Exception exception)
-                //{
-                //    Console.WriteLine(exception.Message);
-                //}
+                }
+                catch (Exception exception) when (exception is SqlException || exception is ArgumentException ||
+                                                  exception is InvalidOperationException)
+                {
+                    Console.WriteLine(exception.Message);
+                }
             }
         }
     }

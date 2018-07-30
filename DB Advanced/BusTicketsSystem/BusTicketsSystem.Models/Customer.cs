@@ -24,7 +24,7 @@
         public int TownId { get; set; }
         public Town HomeTown { get; set; }
 
-        public int BankAccountId { get; set; }
+        public int? BankAccountId { get; set; }
         public BankAccount BankAccount { get; set; }
 
         public ICollection<Ticket> Tickets { get; set; }

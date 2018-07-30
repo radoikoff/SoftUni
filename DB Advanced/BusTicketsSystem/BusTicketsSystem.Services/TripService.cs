@@ -34,5 +34,20 @@
                                         .AsQueryable()
                                         .ProjectTo<TModel>(mapper.ConfigurationProvider)
                                         .ToList();
+
+        public TModel ById<TModel>(int tripId) =>
+                            this.context.Trips
+                                        .Include(x => x.OriginBusStation)
+                                        .Include(x => x.DestinationBusStation)
+                                        .Include(x=>x.Tickets)
+                                        .Where(s => s.Id == tripId)
+                                        .AsQueryable()
+                                        .ProjectTo<TModel>(mapper.ConfigurationProvider)
+                                        .SingleOrDefault();
+
+        public bool Exists(int tripId)
+        {
+            return this.context.Trips.Find(tripId) != null;
+        }
     }
 }

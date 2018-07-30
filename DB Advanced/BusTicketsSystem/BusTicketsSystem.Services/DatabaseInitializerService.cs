@@ -5,6 +5,7 @@
     using BusTicketsSystem.Initializer;
     using System.ComponentModel.DataAnnotations;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class DatabaseInitializerService : IDatabaseInitializerService
     {
@@ -22,10 +23,13 @@
 
         public void Seed()
         {
-            //InsertTowns();
-            //InsertBusStations();
-            //InsertCompanies();
-            //InsertTrips();
+            InsertTowns();
+            InsertBusStations();
+            InsertCompanies();
+            InsertTrips();
+            InsertCustomers();
+            InsertBankAccounts();
+            SetCustomersAccounts();
         }
 
 
@@ -87,6 +91,43 @@
             }
 
             context.SaveChanges();
+        }
+
+        private void InsertBankAccounts()
+        {
+            var accounts = BankAccountInitializer.GetBankAccounts();
+
+            for (int i = 0; i < accounts.Length; i++)
+            {
+                if (IsValid(accounts[i]))
+                {
+                    this.context.BankAccounts.Add(accounts[i]);
+                }
+            }
+
+            context.SaveChanges();
+        }
+
+        private void InsertCustomers()
+        {
+            var customers = CustomerInitializer.GetCustomers();
+
+            for (int i = 0; i < customers.Length; i++)
+            {
+                if (IsValid(customers[i]))
+                {
+                    this.context.Customers.Add(customers[i]);
+                }
+            }
+
+            context.SaveChanges();
+        }
+
+        public void SetCustomersAccounts()
+        {
+            this.context.Customers.Where(x => x.FirstName == "Pesho").FirstOrDefault().BankAccountId = 1;
+            this.context.Customers.Where(x => x.FirstName == "Camelia").FirstOrDefault().BankAccountId = 2;
+            this.context.SaveChanges();
         }
 
         private bool IsValid(object obj)

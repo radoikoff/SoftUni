@@ -31,6 +31,8 @@
             serviceCollection.AddTransient<IDatabaseInitializerService, DatabaseInitializerService>();
             serviceCollection.AddTransient<IStationService, StationService>();
             serviceCollection.AddTransient<ITripService, TripService>();
+            serviceCollection.AddTransient<ICustomerService, CustomerService>();
+            serviceCollection.AddTransient<ITicketService, TicketServise>();
 
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
