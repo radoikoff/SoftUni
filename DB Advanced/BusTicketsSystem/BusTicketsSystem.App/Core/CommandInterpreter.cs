@@ -16,7 +16,7 @@
 
         public string Read(string[] input)
         {
-            string inputCommand = input[0] + "Command";
+            string inputCommand = ConstructCommandText(input[0]) + "Command";
 
             string[] args = input.Skip(1).ToArray();
 
@@ -43,6 +43,16 @@
             string result = command.Execute(args);
 
             return result;
+        }
+
+        private string ConstructCommandText(string input)
+        {
+            var tokens = input.Split('-', StringSplitOptions.RemoveEmptyEntries).Select(x=> char.ToUpper(x[0]) + x.Substring(1));
+
+            var command = string.Join(string.Empty, tokens);
+
+            return command;
+
         }
     }
 }
