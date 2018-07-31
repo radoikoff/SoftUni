@@ -5,7 +5,7 @@
 
     public class TripDto
     {
-        public int TripId { get; set; }
+        //public int TripId { get; set; }
 
         public TripStatus Status { get; set; }
 

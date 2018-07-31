@@ -18,7 +18,8 @@
             CreateMap<BusStation, StationDto>();
 
             CreateMap<Customer, CustomerDto>()
-                .ForMember(dest => dest.Balance, opt => opt.MapFrom(x => x.BankAccount.Balance));
+                .ForMember(dest => dest.Balance, opt => opt.MapFrom(x => x.BankAccount.Balance))
+                .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(x => x.BankAccount.AccountNumber));
 
             CreateMap<Trip, TripDto>()
                 .ForMember(dest => dest.Seats, opt => opt.MapFrom(x => x.Tickets.Select(s => s.Seat)));

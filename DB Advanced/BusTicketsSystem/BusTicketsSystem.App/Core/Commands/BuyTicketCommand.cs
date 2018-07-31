@@ -2,9 +2,7 @@
 using BusTicketsSystem.App.Core.DTOs;
 using BusTicketsSystem.Services.Contracts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BusTicketsSystem.App.Core.Commands
 {
@@ -30,6 +28,11 @@ namespace BusTicketsSystem.App.Core.Commands
             decimal price = decimal.Parse(data[2]);
             string seat = data[3];
 
+            if (price < 0)
+            {
+                throw new ArgumentException("Invalid price");
+            }
+
             var customerExists = this.customerService.Exists(customerId);
 
             if (!customerExists)
@@ -50,7 +53,7 @@ namespace BusTicketsSystem.App.Core.Commands
 
             if (customer.Balance < price)
             {
-                throw new ArgumentException($"Customer with Id {customerId} has not enough money to buy ticket for trip to {trip.DestinationBusStationName}!");
+                throw new ArgumentException($"Insufficient amount of money for customer {customer.FullName} with bank account number {customer.AccountNumber}");
             }
 
             if (trip.Seats.Contains(seat))
