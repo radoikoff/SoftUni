@@ -31,8 +31,48 @@
 
             //GetProductsInRange(context);
             //GetSoldProducts(context);
-            GetCategoriesByProductsCount(context);
+            //GetCategoriesByProductsCount(context);
+            //GetUsersAndProducts(context);
 
+        }
+
+        //Queries
+
+        private static void GetUsersAndProducts(ProductShopContext context)
+        {
+            var users = new UsersOutDto
+            {
+                 Count = context.Users.Count(),
+                 Users = context.Users
+                 .Where(u=>u.ProdcutsSold.Count>=1)
+                 .Select(u=> new UsersUserOutDto
+                 {
+                      FirstName = u.FirstName,
+                      LastName = u.LastName,
+                      Age = u.Age.ToString(),
+                      SoldProducts = new UserSoldProductsOutDto
+                      {
+                          Count = u.ProdcutsSold.Count(),
+                          Products = u.ProdcutsSold.Select(x=> new UserSoldProductsProductOutDto
+                          {
+                               Name = x.Name,
+                               Price = x.Price
+                          })
+                          .ToArray()
+                      }
+                      
+                 })
+                 .ToArray()
+            };
+
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(UsersOutDto), new XmlRootAttribute("users"));
+            serializer.Serialize(new StringWriter(sb), users, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/users-and-products.xml", sb.ToString());
         }
 
         private static void GetCategoriesByProductsCount(ProductShopContext context)
