@@ -9,6 +9,10 @@
     using System.IO;
     using System.Xml.Serialization;
     using ProductShop.Data;
+    using System.Linq;
+    using ProductShop.App.Dto.Output;
+    using System.Text;
+    using System.Xml;
 
     public class StartUp
     {
@@ -24,8 +28,40 @@
             //InsertCategoriesFromXml(context, mapper);
             //InsertProductCategoriesFromXml(context, mapper);
 
+
+            GetProductsInRange(context);
+
         }
 
+        //Queries
+
+        private static void GetProductsInRange(ProductShopContext context)
+        {
+            var products = context.Products
+                                  .Where(x => x.Price >= 1000 && x.Price <= 2000 && x.Buyer != null)
+                                  .OrderByDescending(x => x.Price)
+                                  .Select(x => new ProductOutDto
+                                  {
+                                      Name = x.Name,
+                                      Price = x.Price,
+                                      Buyer = x.Buyer.FirstName + " " + x.Buyer.LastName ?? x.Buyer.LastName
+                                  })
+                                  .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(ProductOutDto[]), new XmlRootAttribute("products"));
+            serializer.Serialize(new StringWriter(sb), products, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/products-in-range.xml", sb.ToString());
+
+
+
+        }
+
+
+        //Inserts
         private static void InsertProductCategoriesFromXml(ProductShopContext context, IMapper mapper)
         {
 

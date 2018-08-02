@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ProductShop.Models\ProductShop.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Xml\Output\" />
+  </ItemGroup>
+
 </Project>
