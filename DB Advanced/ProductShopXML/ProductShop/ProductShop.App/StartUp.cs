@@ -29,8 +29,37 @@
             //InsertProductCategoriesFromXml(context, mapper);
 
 
-            GetProductsInRange(context);
+            //GetProductsInRange(context);
+            GetSoldProducts(context);
 
+        }
+
+        private static void GetSoldProducts(ProductShopContext context)
+        {
+            var users = context.Users
+                               .Where(x => x.ProdcutsSold.Count >= 1)
+                               .Select(x => new UserOutDto
+                               {
+                                   FirstName = x.FirstName,
+                                   LastName = x.LastName,
+                                   SoldProducts = x.ProdcutsSold.Select(p => new SoldProductsOutDto
+                                   {
+                                       Name = p.Name,
+                                       Price = p.Price
+                                   })
+                                   .ToArray()
+                               })
+                               .OrderBy(x => x.LastName)
+                               .ThenBy(x => x.FirstName)
+                               .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(UserOutDto[]), new XmlRootAttribute("users"));
+            serializer.Serialize(new StringWriter(sb), users, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/users-sold-products.xml", sb.ToString());
         }
 
         //Queries
