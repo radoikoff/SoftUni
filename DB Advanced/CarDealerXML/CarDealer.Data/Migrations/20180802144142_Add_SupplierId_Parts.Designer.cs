@@ -4,14 +4,16 @@ using CarDealer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarDealer.Data.Migrations
 {
     [DbContext(typeof(CarDealerContext))]
-    partial class CarDealerContextModelSnapshot : ModelSnapshot
+    [Migration("20180802144142_Add_SupplierId_Parts")]
+    partial class Add_SupplierId_Parts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
