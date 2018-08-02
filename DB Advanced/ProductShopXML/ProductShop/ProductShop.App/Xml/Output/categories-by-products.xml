@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-16"?>
+<categories>
+  <category name="Weapons">
+    <products-count>27</products-count>
+    <average-price>753.04407407407407407407407407</average-price>
+    <total-revenue>20332.19</total-revenue>
+  </category>
+  <category name="Autoparts">
+    <products-count>25</products-count>
+    <average-price>817.5064</average-price>
+    <total-revenue>20437.66</total-revenue>
+  </category>
+  <category name="Electronics">
+    <products-count>24</products-count>
+    <average-price>890.345</average-price>
+    <total-revenue>21368.28</total-revenue>
+  </category>
+  <category name="For Children">
+    <products-count>22</products-count>
+    <average-price>622.81590909090909090909090909</average-price>
+    <total-revenue>13701.95</total-revenue>
+  </category>
+  <category name="Drugs">
+    <products-count>21</products-count>
+    <average-price>713.13666666666666666666666667</average-price>
+    <total-revenue>14975.87</total-revenue>
+  </category>
+  <category name="Adult">
+    <products-count>20</products-count>
+    <average-price>1026.372</average-price>
+    <total-revenue>20527.44</total-revenue>
+  </category>
+  <category name="Business">
+    <products-count>20</products-count>
+    <average-price>696.778</average-price>
+    <total-revenue>13935.56</total-revenue>
+  </category>
+  <category name="Sports">
+    <products-count>14</products-count>
+    <average-price>678.35</average-price>
+    <total-revenue>9496.90</total-revenue>
+  </category>
+  <category name="Fashion">
+    <products-count>14</products-count>
+    <average-price>669.61214285714285714285714286</average-price>
+    <total-revenue>9374.57</total-revenue>
+  </category>
+  <category name="Garden">
+    <products-count>12</products-count>
+    <average-price>739.54</average-price>
+    <total-revenue>8874.48</total-revenue>
+  </category>
+  <category name="Other">
+    <products-count>0</products-count>
+    <average-price>0</average-price>
+    <total-revenue>0</total-revenue>
+  </category>
+</categories>

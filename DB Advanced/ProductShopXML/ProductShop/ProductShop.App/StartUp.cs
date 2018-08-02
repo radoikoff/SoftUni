@@ -30,8 +30,32 @@
 
 
             //GetProductsInRange(context);
-            GetSoldProducts(context);
+            //GetSoldProducts(context);
+            GetCategoriesByProductsCount(context);
 
+        }
+
+        private static void GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            var categories = context.Categories
+                                    .OrderByDescending(c => c.CategoryProducts.Count)
+                                    .Select(c => new CategoryOutDto
+                                    {
+                                        Name = c.Name,
+                                        Count = c.CategoryProducts.Count,
+                                        TotalRevenue = c.CategoryProducts.Sum(x => x.Product.Price),
+                                        AveragePrice = c.CategoryProducts.Select(x => x.Product.Price).DefaultIfEmpty(0).Average()
+                                    })
+                                    .ToArray();
+
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(CategoryOutDto[]), new XmlRootAttribute("categories"));
+            serializer.Serialize(new StringWriter(sb), categories, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/categories-by-products.xml", sb.ToString());
         }
 
         private static void GetSoldProducts(ProductShopContext context)
@@ -61,8 +85,6 @@
 
             File.WriteAllText("../../../Xml/Output/users-sold-products.xml", sb.ToString());
         }
-
-        //Queries
 
         private static void GetProductsInRange(ProductShopContext context)
         {
