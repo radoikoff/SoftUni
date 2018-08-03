@@ -31,8 +31,30 @@
             //InsertSales(context, mapper);
 
 
-            GetCarsWithDistance(context);
-            GetCarsFromMakeFerrari(context);
+            //GetCarsWithDistance(context);
+            //GetCarsFromMakeFerrari(context);
+            GetLocalSuppliers(context);
+        }
+
+        private static void GetLocalSuppliers(CarDealerContext context)
+        {
+            var suppliers = context.Suppliers
+                                   .Where(s => s.IsImporter == false)
+                                   .Select(s => new LocalSuppliersOutDto
+                                   {
+                                       Id = s.Id,
+                                       Name = s.Name,
+                                       PartsCount = s.Parts.Count
+                                   })
+                                   .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(LocalSuppliersOutDto[]), new XmlRootAttribute("suppliers"));
+            serializer.Serialize(new StringWriter(sb), suppliers, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/local-suppliers.xml", sb.ToString());
         }
 
         private static void GetCarsFromMakeFerrari(CarDealerContext context)
