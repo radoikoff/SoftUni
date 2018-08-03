@@ -33,7 +33,35 @@
 
             //GetCarsWithDistance(context);
             //GetCarsFromMakeFerrari(context);
-            GetLocalSuppliers(context);
+            //GetLocalSuppliers(context);
+            GetCarsWithTheirListOfParts(context);
+        }
+
+        private static void GetCarsWithTheirListOfParts(CarDealerContext context)
+        {
+            var cars = context.Cars
+                              .Select(c => new CarOutDto
+                              {
+                                  Make = c.Make,
+                                  Model = c.Model,
+                                  TravelledDistance = c.TravelledDistance,
+                                  Parts = c.PartCars.Select(p=> new PartOutDto
+                                  {
+                                       Name = p.Part.Name,
+                                       Price = p.Part.Price
+                                  })
+                                  .ToArray()
+                              })
+                              .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(CarOutDto[]), new XmlRootAttribute("cars"));
+            serializer.Serialize(new StringWriter(sb), cars, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/cars-and-parts.xml", sb.ToString());
+
         }
 
         private static void GetLocalSuppliers(CarDealerContext context)
