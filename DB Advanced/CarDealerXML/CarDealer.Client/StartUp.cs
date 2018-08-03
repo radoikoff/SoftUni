@@ -8,6 +8,8 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Text;
+    using System.Xml;
     using System.Xml.Serialization;
     using DA = System.ComponentModel.DataAnnotations;
 
@@ -28,7 +30,33 @@
             //InsertSales(context, mapper);
 
 
+            GetCarsWithDistance(context);
         }
+
+        private static void GetCarsWithDistance(CarDealerContext context)
+        {
+            var cars = context.Cars
+                              .Where(c => c.TravelledDistance > 2000000)
+                              .OrderBy(c => c.Make)
+                              .ThenBy(c => c.Model)
+                              .Select(c => new CarDto
+                              {
+                                  Make = c.Make,
+                                  Model = c.Model,
+                                  TravelledDistance = c.TravelledDistance
+                              })
+                              .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(CarDto[]), new XmlRootAttribute("cars"));
+            serializer.Serialize(new StringWriter(sb), cars, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/cars.xml", sb.ToString());
+        }
+
+        //Inserts
 
         private static void InsertSales(CarDealerContext context, IMapper mapper)
         {
