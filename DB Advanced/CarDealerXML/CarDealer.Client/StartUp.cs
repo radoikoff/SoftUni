@@ -34,7 +34,31 @@
             //GetCarsWithDistance(context);
             //GetCarsFromMakeFerrari(context);
             //GetLocalSuppliers(context);
-            GetCarsWithTheirListOfParts(context);
+            //GetCarsWithTheirListOfParts(context);
+            GetTotalSalesByCustomer(context);
+        }
+
+        private static void GetTotalSalesByCustomer(CarDealerContext context)
+        {
+            var customers = context.Customers
+                                   .Where(c => c.Sales.Count >= 1)
+                                   .Select(c => new CustomerWithCarsOutDto
+                                   {
+                                       FullName = c.Name,
+                                       BoughtCars = c.Sales.Count,
+                                       SpentMoney = c.Sales.Sum(s => s.Car.PartCars.Sum(p => p.Part.Price))
+                                   })
+                                   .OrderByDescending(x => x.SpentMoney)
+                                   .ThenByDescending(x => x.BoughtCars)
+                                   .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(CustomerWithCarsOutDto[]), new XmlRootAttribute("customers"));
+            serializer.Serialize(new StringWriter(sb), customers, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/customers-total-sales.xml", sb.ToString());
         }
 
         private static void GetCarsWithTheirListOfParts(CarDealerContext context)
@@ -45,10 +69,10 @@
                                   Make = c.Make,
                                   Model = c.Model,
                                   TravelledDistance = c.TravelledDistance,
-                                  Parts = c.PartCars.Select(p=> new PartOutDto
+                                  Parts = c.PartCars.Select(p => new PartOutDto
                                   {
-                                       Name = p.Part.Name,
-                                       Price = p.Part.Price
+                                      Name = p.Part.Name,
+                                      Price = p.Part.Price
                                   })
                                   .ToArray()
                               })
