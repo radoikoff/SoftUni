@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using CarDealer.Client.Dto;
+    using CarDealer.Client.Dto.Output;
     using CarDealer.Data;
     using CarDealer.Models;
     using System;
@@ -31,6 +32,30 @@
 
 
             GetCarsWithDistance(context);
+            GetCarsFromMakeFerrari(context);
+        }
+
+        private static void GetCarsFromMakeFerrari(CarDealerContext context)
+        {
+            var cars = context.Cars
+                              .Where(c => c.Make == "Ferrari")
+                              .OrderBy(c => c.Model)
+                              .ThenByDescending(c => c.TravelledDistance)
+                              .Select(c => new FerrariCarOutDto
+                              {
+                                  Id = c.Id,
+                                  Model = c.Model,
+                                  TravelledDistance = c.TravelledDistance
+                              })
+                              .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(FerrariCarOutDto[]), new XmlRootAttribute("cars"));
+            serializer.Serialize(new StringWriter(sb), cars, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/ferrari-cars.xml", sb.ToString());
         }
 
         private static void GetCarsWithDistance(CarDealerContext context)
