@@ -35,7 +35,37 @@
             //GetCarsFromMakeFerrari(context);
             //GetLocalSuppliers(context);
             //GetCarsWithTheirListOfParts(context);
-            GetTotalSalesByCustomer(context);
+            //GetTotalSalesByCustomer(context);
+            //GetSalesWithDiscount(context);
+        }
+
+        //Queries
+        private static void GetSalesWithDiscount(CarDealerContext context)
+        {
+            var sales = context.Sales
+                               .Select(s => new SaleOutDto
+                               {
+                                    CarData = new CarOutTwoDto
+                                    {
+                                         Make = s.Car.Make,
+                                         Model = s.Car.Model,
+                                         TravelledDistance = s.Car.TravelledDistance
+                                    },
+
+                                     CustomerName = s.Customer.Name,
+                                     Discount = s.Discount,
+                                     Price =  s.Car.PartCars.Sum(pc=>pc.Part.Price),
+                                     PriceWithDiscount = (s.Car.PartCars.Sum(pc => pc.Part.Price)) * (1 - s.Discount)
+                               })
+                               .ToArray();
+
+            var sb = new StringBuilder();
+            var xmlNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+
+            var serializer = new XmlSerializer(typeof(SaleOutDto[]), new XmlRootAttribute("sales"));
+            serializer.Serialize(new StringWriter(sb), sales, xmlNamespaces);
+
+            File.WriteAllText("../../../Xml/Output/sales-discounts.xml", sb.ToString());
         }
 
         private static void GetTotalSalesByCustomer(CarDealerContext context)
