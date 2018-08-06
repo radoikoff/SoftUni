@@ -39,6 +39,9 @@
 
             #endregion
 
+
+            #region JSON data inserts and queries
+
             //InsertUsersFromJson(context);
             //InsertProductsFromJson(context);
             //InsertCategoriesFromJson(context);
@@ -47,16 +50,50 @@
             //GetProductsInRangeInJson(context);
             //GetSucessfulySoldProductsInJson(context);
             //GetCategoriesByProductsCountInJson(context);
-            GetUsersWithProductsInJson(context);
+            //GetUsersWithProductsInJson(context);
 
+            #endregion
         }
+
+        //JSON Queries
 
         private static void GetUsersWithProductsInJson(ProductShopContext context)
         {
+            var users = new
+            {
+                usersCount = context.Users.Count(),
+                users = context.Users
+                               .OrderByDescending(u => u.ProdcutsSold.Count)
+                               .ThenBy(u => u.LastName)
+                               .Where(x => x.ProdcutsSold.Count >= 1 && x.ProdcutsSold.Any(p => p.Buyer != null))
+                               .Select(x => new
+                               {
+                                   firstName = x.FirstName,
+                                   lastName = x.LastName,
+                                   age = x.Age,
+                                   soldProducts = new
+                                   {
+                                       count = x.ProdcutsSold.Count,
+                                       products = x.ProdcutsSold.Select(v => new
+                                       {
+                                           name = v.Name,
+                                           price = v.Price
+                                       })
+                                       .ToArray()
+                                   }
+                               })
+                               .ToArray()
+            };
 
 
 
+            var jsonProducts = JsonConvert.SerializeObject(users, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
 
+            File.WriteAllText("../../../Json/Output/users-and-products.json", jsonProducts);
         }
 
         private static void GetCategoriesByProductsCountInJson(ProductShopContext context)
