@@ -13,6 +13,7 @@
     using ProductShop.App.Dto.Output;
     using System.Text;
     using System.Xml;
+    using Newtonsoft.Json;
 
     public class StartUp
     {
@@ -22,6 +23,8 @@
             var mapper = config.CreateMapper();
 
             var context = new ProductShopContext();
+
+            #region XML data inserts and queries
 
             //InsertUsersFromXml(context, mapper);
             //InsertProductsFromXml(context, mapper);
@@ -34,33 +37,140 @@
             //GetCategoriesByProductsCount(context);
             //GetUsersAndProducts(context);
 
+            #endregion
+
+            //InsertUsersFromJson(context);
+            //InsertProductsFromJson(context);
+            //InsertCategoriesFromJson(context);
+            //InsertProductCategoriesFromJson(context);
+
         }
 
-        //Queries
+
+        //JSON Inserts
+
+        private static void InsertProductCategoriesFromJson(ProductShopContext context)
+        {
+            var categoryProducts = new List<CategoryProduct>();
+
+            for (int productId = 1; productId <= 200; productId++)
+            {
+                var categoryId = new Random().Next(1, 12);
+
+                var categoryProduct = new CategoryProduct
+                {
+                    CategoryId = categoryId,
+                    ProductId = productId
+                };
+
+                categoryProducts.Add(categoryProduct);
+            }
+
+            context.CategoryProducts.AddRange(categoryProducts);
+            context.SaveChanges();
+        }
+
+        private static void InsertCategoriesFromJson(ProductShopContext context)
+        {
+            string jsonString = File.ReadAllText("../../../Json/categories.json");
+
+            var deserializedCategories = JsonConvert.DeserializeObject<Category[]>(jsonString);
+
+            var categories = new List<Category>();
+
+            foreach (var category in deserializedCategories)
+            {
+                if (IsValid(category))
+                {
+                    categories.Add(category);
+                }
+            }
+
+            context.Categories.AddRange(categories);
+            context.SaveChanges();
+        }
+
+        private static void InsertProductsFromJson(ProductShopContext context)
+        {
+            string jsonString = File.ReadAllText("../../../Json/products.json");
+
+            var deserializedProducts = JsonConvert.DeserializeObject<Product[]>(jsonString);
+
+            var products = new List<Product>();
+
+            foreach (var product in deserializedProducts)
+            {
+                if (!IsValid(product))
+                {
+                    continue;
+                }
+
+                var sellerId = new Random().Next(1, 35);
+                var buyerId = new Random().Next(35, 57);
+
+                var random = new Random().Next(1, 5);
+
+                product.SellerId = sellerId;
+                product.BuyerId = buyerId;
+
+                if (random == 4)
+                {
+                    product.BuyerId = null;
+                }
+
+                products.Add(product);
+            }
+
+            context.Products.AddRange(products);
+            context.SaveChanges();
+        }
+
+        private static void InsertUsersFromJson(ProductShopContext context)
+        {
+            string jsonString = File.ReadAllText("../../../Json/users.json");
+
+            var deserializedUsers = JsonConvert.DeserializeObject<User[]>(jsonString);
+
+            var users = new List<User>();
+
+            foreach (var user in deserializedUsers)
+            {
+                if (IsValid(user))
+                {
+                    users.Add(user);
+                }
+            }
+
+            context.Users.AddRange(users);
+            context.SaveChanges();
+        }
+
+
+        //XML Queries
 
         private static void GetUsersAndProducts(ProductShopContext context)
         {
             var users = new UsersOutDto
             {
-                 Count = context.Users.Count(),
-                 Users = context.Users
-                 .Where(u=>u.ProdcutsSold.Count>=1)
-                 .Select(u=> new UsersUserOutDto
+                Count = context.Users.Count(),
+                Users = context.Users
+                 .Where(u => u.ProdcutsSold.Count >= 1)
+                 .Select(u => new UsersUserOutDto
                  {
-                      FirstName = u.FirstName,
-                      LastName = u.LastName,
-                      Age = u.Age.ToString(),
-                      SoldProducts = new UserSoldProductsOutDto
-                      {
-                          Count = u.ProdcutsSold.Count(),
-                          Products = u.ProdcutsSold.Select(x=> new UserSoldProductsProductOutDto
-                          {
-                               Name = x.Name,
-                               Price = x.Price
-                          })
+                     FirstName = u.FirstName,
+                     LastName = u.LastName,
+                     Age = u.Age.ToString(),
+                     SoldProducts = new UserSoldProductsOutDto
+                     {
+                         Count = u.ProdcutsSold.Count(),
+                         Products = u.ProdcutsSold.Select(x => new UserSoldProductsProductOutDto
+                         {
+                             Name = x.Name,
+                             Price = x.Price
+                         })
                           .ToArray()
-                      }
-                      
+                     }
+
                  })
                  .ToArray()
             };
@@ -152,7 +262,7 @@
         }
 
 
-        //Inserts
+        //XML Inserts
         private static void InsertProductCategoriesFromXml(ProductShopContext context, IMapper mapper)
         {
 
@@ -257,6 +367,7 @@
             context.Users.AddRange(users);
             context.SaveChanges();
         }
+
 
         private static bool IsValid(object obj)
         {
