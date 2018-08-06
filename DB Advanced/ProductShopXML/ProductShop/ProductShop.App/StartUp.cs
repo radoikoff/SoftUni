@@ -44,8 +44,40 @@
             //InsertCategoriesFromJson(context);
             //InsertProductCategoriesFromJson(context);
 
-            GetProductsInRangeInJson(context);
+            //GetProductsInRangeInJson(context);
+            GetSucessfulySoldProductsInJson(context);
 
+        }
+
+        private static void GetSucessfulySoldProductsInJson(ProductShopContext context)
+        {
+            var users = context.Users
+                               .Where(x => x.ProdcutsSold.Count >= 1 && x.ProdcutsSold.Any(p => p.Buyer != null))
+                               .OrderBy(x => x.LastName)
+                               .ThenBy(x => x.FirstName)
+                               .Select(s => new
+                               {
+                                   firstName = s.FirstName,
+                                   lastName = s.LastName,
+                                   soldProducts = s.ProdcutsSold.Where(x => x.Buyer != null)
+                                                                .Select(v => new
+                                                                {
+                                                                    name = v.Name,
+                                                                    price = v.Price,
+                                                                    buyerFirstName = v.Buyer.FirstName,
+                                                                    buyerLastName = v.Buyer.LastName
+                                                                })
+                                                                .ToArray()
+                               })
+                               .ToArray();
+
+            var jsonProducts = JsonConvert.SerializeObject(users, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            File.WriteAllText("../../../Json/Output/users-sold-products.json", jsonProducts);
         }
 
         private static void GetProductsInRangeInJson(ProductShopContext context)
