@@ -44,6 +44,26 @@
             //InsertCategoriesFromJson(context);
             //InsertProductCategoriesFromJson(context);
 
+            GetProductsInRangeInJson(context);
+
+        }
+
+        private static void GetProductsInRangeInJson(ProductShopContext context)
+        {
+            var products = context.Products
+                                  .Where(p => p.Price >= 500 && p.Price <= 1000)
+                                  .OrderBy(p => p.Price)
+                                  .Select(p => new
+                                  {
+                                      name = p.Name,
+                                      price = p.Price,
+                                      seller = p.Seller.FirstName + " " + p.Seller.LastName ?? p.Seller.LastName
+                                  })
+                                  .ToArray();
+
+            var jsonProducts = JsonConvert.SerializeObject(products, Newtonsoft.Json.Formatting.Indented);
+
+            File.WriteAllText("../../../Json/Output/products-in-range.json", jsonProducts);
         }
 
 
