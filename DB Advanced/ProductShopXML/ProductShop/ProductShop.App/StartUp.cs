@@ -45,8 +45,40 @@
             //InsertProductCategoriesFromJson(context);
 
             //GetProductsInRangeInJson(context);
-            GetSucessfulySoldProductsInJson(context);
+            //GetSucessfulySoldProductsInJson(context);
+            //GetCategoriesByProductsCountInJson(context);
+            GetUsersWithProductsInJson(context);
 
+        }
+
+        private static void GetUsersWithProductsInJson(ProductShopContext context)
+        {
+
+
+
+
+        }
+
+        private static void GetCategoriesByProductsCountInJson(ProductShopContext context)
+        {
+            var products = context.Categories
+                                  .OrderByDescending(x => x.CategoryProducts.Count)
+                                  .Select(x => new
+                                  {
+                                      category = x.Name,
+                                      productsCount = x.CategoryProducts.Count,
+                                      averagePrice = x.CategoryProducts.Sum(s => s.Product.Price) / x.CategoryProducts.Count,
+                                      totalRevenue = x.CategoryProducts.Sum(s => s.Product.Price)
+                                  })
+                                  .ToArray();
+
+            var jsonProducts = JsonConvert.SerializeObject(products, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            File.WriteAllText("../../../Json/Output/categories-by-products.json", jsonProducts);
         }
 
         private static void GetSucessfulySoldProductsInJson(ProductShopContext context)
