@@ -47,7 +47,32 @@
             //InsertCustomersJson(context);
             //InsertSales(context);
 
-            GetOrderedCustomersJson(context);
+            //GetOrderedCustomersJson(context);
+            GetCarsFromMakeToyota(context);
+        }
+
+        private static void GetCarsFromMakeToyota(CarDealerContext context)
+        {
+            var cars = context.Cars
+                              .Where(x=>x.Make == "Toyota")
+                              .OrderBy(x => x.Model)
+                              .ThenByDescending(x => x.TravelledDistance)
+                              .Select(x=> new
+                              {
+                                  x.Id,
+                                  x.Make,
+                                  x.Model,
+                                  x.TravelledDistance
+                              })
+                              .ToArray();
+
+            var json = JsonConvert.SerializeObject(cars, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            File.WriteAllText("../../../Json/Output/toyota-cars.json", json);
         }
 
         private static void GetOrderedCustomersJson(CarDealerContext context)
@@ -55,14 +80,14 @@
             var customers = context.Customers
                                    .OrderBy(x => x.BirthDate)
                                    .ThenBy(x=>x.IsYoungDriver)
-                                   .Select(x=> new
-                                   {
-                                       Id = x.Id,
-                                       Name = x.Name,
-                                       BirthDate = x.BirthDate,
-                                       IsYoungDriver = x.IsYoungDriver,
-                                       Sales = x.Sales.ToArray() 
-                                   })
+                                   //.Select(x=> new
+                                   //{
+                                   //    Id = x.Id,
+                                   //    Name = x.Name,
+                                   //    BirthDate = x.BirthDate,
+                                   //    IsYoungDriver = x.IsYoungDriver,
+                                   //    Sales = x.Sales.ToArray() 
+                                   //})
                                    .ToArray();
 
             var json = JsonConvert.SerializeObject(customers, new JsonSerializerSettings
