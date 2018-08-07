@@ -51,14 +51,44 @@
             //GetCarsFromMakeToyota(context);
             //GetLocalSuppliersJson(context);
             //GetCarsWithPartsJson(context);
-            GetTotalSalesByCustomerJson(context);
+            //GetTotalSalesByCustomerJson(context);
+            GetSalesWithDiscountJson(context);
+        }
+
+        private static void GetSalesWithDiscountJson(CarDealerContext context)
+        {
+            var sales = context.Sales
+                               .Select(s => new
+                               {
+                                   car = new
+                                   {
+                                       s.Car.Make,
+                                       s.Car.Model,
+                                       s.Car.TravelledDistance
+                                   },
+
+                                   customerName = s.Customer.Name,
+                                   Discount = s.Discount,
+                                   price = s.Car.PartCars.Sum(pc => pc.Part.Price),
+                                   priceWithDiscount = (s.Car.PartCars.Sum(pc => pc.Part.Price)) * (1 - s.Discount)
+                               })
+                               .ToArray();
+
+
+            var json = JsonConvert.SerializeObject(sales, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            File.WriteAllText("../../../Json/Output/sales-discounts.json", json);
         }
 
         private static void GetTotalSalesByCustomerJson(CarDealerContext context)
         {
             var customers = context.Customers
-                                   .Where(x=>x.Sales.Count >= 1)
-                                   .Select(x=> new
+                                   .Where(x => x.Sales.Count >= 1)
+                                   .Select(x => new
                                    {
                                        fullName = x.Name,
                                        boughtCars = x.Sales.Count,
