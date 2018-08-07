@@ -49,7 +49,38 @@
 
             //GetOrderedCustomersJson(context);
             //GetCarsFromMakeToyota(context);
-            GetLocalSuppliersJson(context);
+            //GetLocalSuppliersJson(context);
+            GetCarsWithPartsJson(context);
+        }
+
+        private static void GetCarsWithPartsJson(CarDealerContext context)
+        {
+            var cars = context.Cars
+                              .Select(x => new
+                              {
+                                  car = new
+                                  {
+                                      x.Make,
+                                      x.Model,
+                                      x.TravelledDistance
+                                  },
+                                  parts = x.PartCars.Select(p => new
+                                  {
+                                      p.Part.Name,
+                                      p.Part.Price
+                                  })
+                                  .ToArray()
+
+                              })
+                              .ToArray();
+
+            var json = JsonConvert.SerializeObject(cars, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            File.WriteAllText("../../../Json/Output/cars-and-parts.json", json);
         }
 
         private static void GetLocalSuppliersJson(CarDealerContext context)
