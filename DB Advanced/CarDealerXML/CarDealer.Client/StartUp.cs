@@ -48,16 +48,38 @@
             //InsertSales(context);
 
             //GetOrderedCustomersJson(context);
-            GetCarsFromMakeToyota(context);
+            //GetCarsFromMakeToyota(context);
+            GetLocalSuppliersJson(context);
+        }
+
+        private static void GetLocalSuppliersJson(CarDealerContext context)
+        {
+            var suppliers = context.Suppliers
+                                   .Where(x => x.IsImporter == false)
+                                   .Select(x => new
+                                   {
+                                       x.Id,
+                                       x.Name,
+                                       PartsCount = x.Parts.Count()
+                                   })
+                                   .ToArray();
+
+            var json = JsonConvert.SerializeObject(suppliers, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            File.WriteAllText("../../../Json/Output/local-suppliers.json", json);
         }
 
         private static void GetCarsFromMakeToyota(CarDealerContext context)
         {
             var cars = context.Cars
-                              .Where(x=>x.Make == "Toyota")
+                              .Where(x => x.Make == "Toyota")
                               .OrderBy(x => x.Model)
                               .ThenByDescending(x => x.TravelledDistance)
-                              .Select(x=> new
+                              .Select(x => new
                               {
                                   x.Id,
                                   x.Make,
@@ -79,7 +101,7 @@
         {
             var customers = context.Customers
                                    .OrderBy(x => x.BirthDate)
-                                   .ThenBy(x=>x.IsYoungDriver)
+                                   .ThenBy(x => x.IsYoungDriver)
                                    //.Select(x=> new
                                    //{
                                    //    Id = x.Id,
@@ -98,7 +120,9 @@
 
             File.WriteAllText("../../../Json/Output/ordered-customers.json", json);
         }
-  
+
+
+        //Inserts JSON
         private static void InsertSales(CarDealerContext context)
         {
             var discountValues = new decimal[] { 0, 0.05m, 0.10m, 0.15m, 0.20m, 0.30m, 0.40m, 0.50m };
@@ -230,7 +254,7 @@
         }
 
 
-        //Queries
+        //Queries XML
         private static void GetSalesWithDiscount(CarDealerContext context)
         {
             var sales = context.Sales
@@ -376,7 +400,7 @@
             File.WriteAllText("../../../Xml/Output/cars.xml", sb.ToString());
         }
 
-        //Inserts
+        //Inserts XML
 
         private static void InsertSales(CarDealerContext context, IMapper mapper)
         {
