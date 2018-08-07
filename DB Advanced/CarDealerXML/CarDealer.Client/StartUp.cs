@@ -40,13 +40,40 @@
             //GetSalesWithDiscount(context);
 
 
+
             //InsertSuppliersJson(context);
             //InsertPartsJson(context);
             //InsertCarsJson(context);
             //InsertCustomersJson(context);
-            InsertSales(context);
+            //InsertSales(context);
+
+            GetOrderedCustomersJson(context);
         }
 
+        private static void GetOrderedCustomersJson(CarDealerContext context)
+        {
+            var customers = context.Customers
+                                   .OrderBy(x => x.BirthDate)
+                                   .ThenBy(x=>x.IsYoungDriver)
+                                   .Select(x=> new
+                                   {
+                                       Id = x.Id,
+                                       Name = x.Name,
+                                       BirthDate = x.BirthDate,
+                                       IsYoungDriver = x.IsYoungDriver,
+                                       Sales = x.Sales.ToArray() 
+                                   })
+                                   .ToArray();
+
+            var json = JsonConvert.SerializeObject(customers, new JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore
+            });
+
+            File.WriteAllText("../../../Json/Output/ordered-customers.json", json);
+        }
+  
         private static void InsertSales(CarDealerContext context)
         {
             var discountValues = new decimal[] { 0, 0.05m, 0.10m, 0.15m, 0.20m, 0.30m, 0.40m, 0.50m };

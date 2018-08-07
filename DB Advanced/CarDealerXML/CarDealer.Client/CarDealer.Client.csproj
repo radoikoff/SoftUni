@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Json\Output\" />
     <Folder Include="Xml\Output\" />
   </ItemGroup>
 
