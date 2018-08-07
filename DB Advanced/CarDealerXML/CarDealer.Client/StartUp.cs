@@ -43,7 +43,41 @@
             //InsertSuppliersJson(context);
             //InsertPartsJson(context);
             //InsertCarsJson(context);
-            InsertCustomersJson(context);
+            //InsertCustomersJson(context);
+            InsertSales(context);
+        }
+
+        private static void InsertSales(CarDealerContext context)
+        {
+            var discountValues = new decimal[] { 0, 0.05m, 0.10m, 0.15m, 0.20m, 0.30m, 0.40m, 0.50m };
+
+            List<Sale> sales = new List<Sale>();
+
+            var random = new Random();
+
+            for (int saleId = 0; saleId < 400; saleId++)
+            {
+                var carId = random.Next(1, 358);
+                var customerId = random.Next(1, 31);
+                var discount = discountValues.OrderBy(x => random.Next()).First();
+
+                if (context.Customers.Find(customerId).IsYoungDriver)
+                {
+                    discount += 0.05m;
+                }
+
+                var sale = new Sale
+                {
+                    CarId = carId,
+                    CustomerId = customerId,
+                    Discount = discount
+                };
+
+                sales.Add(sale);
+            }
+
+            context.Sales.AddRange(sales);
+            context.SaveChanges();
         }
 
         private static void InsertCustomersJson(CarDealerContext context)
