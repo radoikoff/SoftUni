@@ -40,8 +40,29 @@
             //GetSalesWithDiscount(context);
 
 
-            InsertSuppliersJson(context);
-            
+            //InsertSuppliersJson(context);
+            InsertPartsJson(context);
+        }
+
+        private static void InsertPartsJson(CarDealerContext context)
+        {
+            string jsonString = File.ReadAllText("../../../Json/parts.json");
+
+            var deserializedParts = JsonConvert.DeserializeObject<Part[]>(jsonString);
+
+            var parts = new List<Part>();
+
+            foreach (var part in deserializedParts)
+            {
+                if (IsValid(part))
+                {
+                    part.SupplierId = new Random().Next(1, 32);
+                    parts.Add(part);
+                }
+            }
+
+            context.Parts.AddRange(parts);
+            context.SaveChanges();
         }
 
         private static void InsertSuppliersJson(CarDealerContext context)
