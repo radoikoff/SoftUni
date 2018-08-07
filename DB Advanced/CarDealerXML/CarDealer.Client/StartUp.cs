@@ -42,7 +42,28 @@
 
             //InsertSuppliersJson(context);
             //InsertPartsJson(context);
-            InsertCarsJson(context);
+            //InsertCarsJson(context);
+            InsertCustomersJson(context);
+        }
+
+        private static void InsertCustomersJson(CarDealerContext context)
+        {
+            string jsonString = File.ReadAllText("../../../Json/customers.json");
+
+            var deserializedCustomers = JsonConvert.DeserializeObject<Customer[]>(jsonString);
+
+            var customers = new List<Customer>();
+
+            foreach (var customer in deserializedCustomers)
+            {
+                if (IsValid(customer))
+                {
+                    customers.Add(customer);
+                }
+            }
+
+            context.Customers.AddRange(customers);
+            context.SaveChanges();
         }
 
         private static void InsertCarsJson(CarDealerContext context)
