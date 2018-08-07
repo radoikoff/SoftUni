@@ -5,6 +5,7 @@
     using CarDealer.Client.Dto.Output;
     using CarDealer.Data;
     using CarDealer.Models;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -37,7 +38,32 @@
             //GetCarsWithTheirListOfParts(context);
             //GetTotalSalesByCustomer(context);
             //GetSalesWithDiscount(context);
+
+
+            InsertSuppliersJson(context);
+            
         }
+
+        private static void InsertSuppliersJson(CarDealerContext context)
+        {
+            string jsonString = File.ReadAllText("../../../Json/suppliers.json");
+
+            var deserializedSuppliers = JsonConvert.DeserializeObject<Supplier[]>(jsonString);
+
+            var suppliers = new List<Supplier>();
+
+            foreach (var supplier in deserializedSuppliers)
+            {
+                if (IsValid(supplier))
+                {
+                    suppliers.Add(supplier);
+                }
+            }
+
+            context.Suppliers.AddRange(suppliers);
+            context.SaveChanges();
+        }
+
 
         //Queries
         private static void GetSalesWithDiscount(CarDealerContext context)
@@ -45,17 +71,17 @@
             var sales = context.Sales
                                .Select(s => new SaleOutDto
                                {
-                                    CarData = new CarOutTwoDto
-                                    {
-                                         Make = s.Car.Make,
-                                         Model = s.Car.Model,
-                                         TravelledDistance = s.Car.TravelledDistance
-                                    },
+                                   CarData = new CarOutTwoDto
+                                   {
+                                       Make = s.Car.Make,
+                                       Model = s.Car.Model,
+                                       TravelledDistance = s.Car.TravelledDistance
+                                   },
 
-                                     CustomerName = s.Customer.Name,
-                                     Discount = s.Discount,
-                                     Price =  s.Car.PartCars.Sum(pc=>pc.Part.Price),
-                                     PriceWithDiscount = (s.Car.PartCars.Sum(pc => pc.Part.Price)) * (1 - s.Discount)
+                                   CustomerName = s.Customer.Name,
+                                   Discount = s.Discount,
+                                   Price = s.Car.PartCars.Sum(pc => pc.Part.Price),
+                                   PriceWithDiscount = (s.Car.PartCars.Sum(pc => pc.Part.Price)) * (1 - s.Discount)
                                })
                                .ToArray();
 
