@@ -24,6 +24,7 @@
 
             var context = new CarDealerContext();
 
+            #region XML
             //InsertSuppliers(context, mapper);
             //InsertParts(context, mapper);
             //InsertCars(context, mapper);
@@ -31,16 +32,15 @@
             //InsertCustomers(context, mapper);
             //InsertSales(context, mapper);
 
-
             //GetCarsWithDistance(context);
             //GetCarsFromMakeFerrari(context);
             //GetLocalSuppliers(context);
             //GetCarsWithTheirListOfParts(context);
             //GetTotalSalesByCustomer(context);
             //GetSalesWithDiscount(context);
+            #endregion
 
-
-
+            #region JSON
             //InsertSuppliersJson(context);
             //InsertPartsJson(context);
             //InsertCarsJson(context);
@@ -52,9 +52,11 @@
             //GetLocalSuppliersJson(context);
             //GetCarsWithPartsJson(context);
             //GetTotalSalesByCustomerJson(context);
-            GetSalesWithDiscountJson(context);
+            //GetSalesWithDiscountJson(context);
+            #endregion
         }
 
+        //Queries JSON
         private static void GetSalesWithDiscountJson(CarDealerContext context)
         {
             var sales = context.Sales
