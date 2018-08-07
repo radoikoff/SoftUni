@@ -41,7 +41,44 @@
 
 
             //InsertSuppliersJson(context);
-            InsertPartsJson(context);
+            //InsertPartsJson(context);
+            InsertCarsJson(context);
+        }
+
+        private static void InsertCarsJson(CarDealerContext context)
+        {
+            string jsonString = File.ReadAllText("../../../Json/cars.json");
+
+            var deserializedCars = JsonConvert.DeserializeObject<Car[]>(jsonString);
+
+            var cars = new List<Car>();
+            var parts = new List<PartCar>();
+
+            foreach (var car in deserializedCars)
+            {
+                if (!IsValid(car))
+                {
+                    continue;
+                }
+
+                cars.Add(car);
+
+                var numberOfParts = new Random().Next(10, 21);
+                for (int i = 0; i < numberOfParts; i++)
+                {
+                    int partId = new Random().Next(1, 131);
+
+                    while (car.PartCars.Any(x => x.PartId == partId))
+                    {
+                        partId = new Random().Next(1, 131);
+                    }
+
+                    car.PartCars.Add(new PartCar { PartId = partId });
+                }
+            }
+
+            context.Cars.AddRange(cars);
+            context.SaveChanges();
         }
 
         private static void InsertPartsJson(CarDealerContext context)
